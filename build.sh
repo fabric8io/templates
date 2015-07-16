@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-DEST="default"
+DEST="default/template"
 mkdir -p $DEST
 
 FABRIC8_VERSION=${FABRIC8_VERSION:-2.2.9.1}
