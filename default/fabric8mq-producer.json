@@ -1,0 +1,80 @@
+{
+  "apiVersion" : "v1",
+  "kind" : "Template",
+  "labels" : { },
+  "metadata" : {
+    "annotations" : {
+      "fabric8.fabric8mq-producer/summary" : "Fabric8 MQ Example Producer",
+      "fabric8.fabric8mq-producer/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8/master/fabric8-maven-plugin/src/main/resources/icons/activemq.svg",
+      "description" : "Sends messages via [Apache Camel](http://camel.apache.org/) to a queue on [Apache ActiveMQ](http://activemq.apache.org/). Communicates with the broker using a [kubernetes service](http://fabric8.io/v2/services.html)."
+    },
+    "labels" : { },
+    "name" : "fabric8mq-producer"
+  },
+  "objects" : [ {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "fabric8MQProducer",
+        "queuename" : "TEST.FOO",
+        "provider" : "fabric8",
+        "group" : "fabric8mq"
+      },
+      "name" : "fabric8mq-producer"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "fabric8MQProducer",
+        "queuename" : "TEST.FOO",
+        "provider" : "fabric8",
+        "group" : "fabric8mq"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "fabric8MQProducer",
+            "queuename" : "TEST.FOO",
+            "provider" : "fabric8",
+            "group" : "fabric8mq"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "AMQ_SERVICE_ID",
+              "value" : "FABRIC8MQ"
+            }, {
+              "name" : "AMQ_QUEUENAME",
+              "value" : "TEST.FOO"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/fabric8mq-producer:2.2.9.1",
+            "name" : "fabric8mq-producer",
+            "ports" : [ {
+              "containerPort" : 8778,
+              "name" : "jolokia"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  } ],
+  "parameters" : [ ]
+}

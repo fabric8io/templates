@@ -1,0 +1,80 @@
+{
+  "apiVersion" : "v1",
+  "kind" : "Template",
+  "labels" : { },
+  "metadata" : {
+    "annotations" : {
+      "fabric8.fabric8mq-consumer/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8/master/fabric8-maven-plugin/src/main/resources/icons/activemq.svg",
+      "description" : "Consumes messages via [Apache Camel](http://camel.apache.org/) from a queue on [Apache ActiveMQ](http://activemq.apache.org/). Communicates with the broker using a [kubernetes service](http://fabric8.io/v2/services.html).",
+      "fabric8.fabric8mq-consumer/summary" : "Fabric8 MQ Example Consumer"
+    },
+    "labels" : { },
+    "name" : "fabric8mq-consumer"
+  },
+  "objects" : [ {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "fabric8MQConsumer",
+        "queuename" : "TEST.FOO",
+        "provider" : "fabric8",
+        "group" : "fabric8mq"
+      },
+      "name" : "fabric8mq-consumer"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "fabric8MQConsumer",
+        "queuename" : "TEST.FOO",
+        "provider" : "fabric8",
+        "group" : "fabric8mq"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "fabric8MQConsumer",
+            "queuename" : "TEST.FOO",
+            "provider" : "fabric8",
+            "group" : "fabric8mq"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "AMQ_SERVICE_ID",
+              "value" : "FABRIC8MQ"
+            }, {
+              "name" : "AMQ_QUEUENAME",
+              "value" : "TEST.FOO"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/fabric8mq-consumer:2.2.9.1",
+            "name" : "fabric8mq-consumer",
+            "ports" : [ {
+              "containerPort" : 8778,
+              "name" : "jolokia"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  } ],
+  "parameters" : [ ]
+}

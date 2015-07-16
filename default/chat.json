@@ -1,0 +1,317 @@
+{
+  "apiVersion" : "v1",
+  "kind" : "Template",
+  "labels" : { },
+  "metadata" : {
+    "annotations" : {
+      "description" : "Provides [Chat](http://fabric8.io/guide/chat.html) using [Hubot](https://hubot.github.com/) as the bot framework and [Let's Chat](https://github.com/sdelements/lets-chat) as the chat server",
+      "fabric8.hubot-notifier/iconUrl" : "https://cdn.rawgit.com/fabric8io/quickstarts/master/apps/hubot-notifier/src/main/fabric8/icon.png",
+      "fabric8.hubot-notifier/summary" : "Watches the OpenShift environment and notifies Hubot of events such as builds completing or failing",
+      "fabric8.hubot-letschat/summary" : "[Hubot](http://hubot.github.com) chat bot for Lets Chat",
+      "fabric8.hubot-letschat/iconUrl" : "https://cdn.rawgit.com/fabric8io/quickstarts/master/apps/hubot-letschat/src/main/fabric8/icon.png",
+      "fabric8.chat/summary" : "Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/",
+      "fabric8.chat/iconUrl" : "https://cdn.rawgit.com/fabric8io/quickstarts/master/app-groups/chat/src/main/fabric8/icon.png"
+    },
+    "labels" : { },
+    "name" : "chat"
+  },
+  "objects" : [ {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "hubot-letschat",
+        "provider" : "fabric8"
+      },
+      "name" : "hubot-web-hook"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 8080,
+        "protocol" : "TCP",
+        "targetPort" : 8080
+      } ],
+      "selector" : {
+        "component" : "hubot-letschat",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : { },
+      "name" : "letschat"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "targetPort" : 5000
+      } ],
+      "selector" : {
+        "name" : "letschat"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "hubot-letschat",
+        "provider" : "fabric8"
+      },
+      "name" : "hubot-letschat"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "hubot-letschat",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "hubot-letschat",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "LETSCHAT_HUBOT_USERNAME",
+              "value" : "${LETSCHAT_HUBOT_USERNAME}"
+            }, {
+              "name" : "HUBOT_LCB_ROOMS",
+              "value" : "${LETSCHAT_DEFAULT_ROOMS}"
+            }, {
+              "name" : "LETSCHAT_HUBOT_SCRIPTS",
+              "value" : "${LETSCHAT_HUBOT_SCRIPTS}"
+            }, {
+              "name" : "HUBOT_LOG_LEVEL",
+              "value" : "true"
+            }, {
+              "name" : "HUBOT_LCB_TOKEN",
+              "value" : "${LETSCHAT_HUBOT_TOKEN}"
+            }, {
+              "name" : "LETSCHAT_HUBOT_PASSWORD",
+              "value" : "${LETSCHAT_HUBOT_PASSWORD}"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/hubot-letschat",
+            "name" : "hubot-letschat",
+            "ports" : [ {
+              "containerPort" : 8080,
+              "name" : "http"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "hubotNotifier",
+        "provider" : "fabric8"
+      },
+      "name" : "hubot-notifier"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "hubotNotifier",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "hubotNotifier",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "SKIP_TLS_VERIFY",
+              "value" : "true"
+            }, {
+              "name" : "HUBOT_KUBERNETES_ROOM",
+              "value" : "#fabric8_${namespace}"
+            }, {
+              "name" : "KUBERNETES_SERVICE_HOST",
+              "value" : "kubernetes.default.svc.${KUBERNETES_DNS_DOMAIN}"
+            }, {
+              "name" : "KUBERNETES_DISABLE_HOSTNAME_CHECK",
+              "value" : "true"
+            }, {
+              "name" : "KUBERNETES_TRUST_CERT",
+              "value" : "true"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/hubot-notifier:2.2.9.1",
+            "name" : "hubot-notifier",
+            "ports" : [ {
+              "containerPort" : 8778,
+              "name" : "jolokia"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ {
+              "mountPath" : "/etc/secret-volume",
+              "name" : "openshift-cert-secrets",
+              "readOnly" : false
+            } ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "serviceAccount" : "fabric8",
+          "volumes" : [ {
+            "name" : "openshift-cert-secrets",
+            "secret" : {
+              "secretName" : "openshift-cert-secrets"
+            }
+          } ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "name" : "letschat"
+      },
+      "name" : "letschat"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "name" : "letschat"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "name" : "letschat"
+          },
+          "name" : "letschat"
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ ],
+            "image" : "mongo",
+            "name" : "letschat-mongodb",
+            "ports" : [ {
+              "containerPort" : 27017,
+              "protocol" : "TCP"
+            } ],
+            "volumeMounts" : [ ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "LETSCHAT_CREATE_HUBOT_USER",
+              "value" : "true"
+            }, {
+              "name" : "LETSCHAT_HUBOT_TOKEN",
+              "value" : "${LETSCHAT_HUBOT_TOKEN}"
+            }, {
+              "name" : "LETSCHAT_HUBOT_PASSWORD",
+              "value" : "${LETSCHAT_HUBOT_PASSWORD}"
+            }, {
+              "name" : "LETSCHAT_HUBOT_USERNAME",
+              "value" : "fabric8"
+            }, {
+              "name" : "LETSCHAT_HUBOT_EMAIL",
+              "value" : "fabric8-admin@googlegroups.com"
+            }, {
+              "name" : "LETSCHAT_HUBOT_FIRST_NAME",
+              "value" : "fabric8"
+            }, {
+              "name" : "LETSCHAT_HUBOT_LAST_NAME",
+              "value" : "rocks"
+            }, {
+              "name" : "LETSCHAT_HUBOT_DISPLAY_NAME",
+              "value" : "fabric8"
+            }, {
+              "name" : "LETSCHAT_DEFAULT_ROOMS",
+              "value" : "${LETSCHAT_DEFAULT_ROOMS}"
+            }, {
+              "name" : "LCB_NOROBOTS",
+              "value" : "false"
+            }, {
+              "name" : "LCB_FILES_ENABLE",
+              "value" : "true"
+            }, {
+              "name" : "LCB_DATABASE_URI",
+              "value" : "mongodb://127.0.0.1:27017/letschat"
+            } ],
+            "image" : "fabric8/lets-chat",
+            "name" : "letschat",
+            "ports" : [ {
+              "containerPort" : 5000,
+              "protocol" : "TCP"
+            } ],
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  } ],
+  "parameters" : [ {
+    "description" : "The DNS domain added to the serviceName.namespace.svc. to make the DNS name",
+    "name" : "KUBERNETES_DNS_DOMAIN",
+    "value" : "cluster.local"
+  }, {
+    "description" : "Default rooms to create and for hubot to join",
+    "name" : "LETSCHAT_DEFAULT_ROOMS",
+    "value" : "fabric8_default"
+  }, {
+    "description" : "The password for Hubot to login to Let's Chat",
+    "name" : "LETSCHAT_HUBOT_PASSWORD",
+    "value" : "RedHat$1"
+  }, {
+    "description" : "Coffeescripts for hubot",
+    "name" : "LETSCHAT_HUBOT_SCRIPTS",
+    "value" : "https://github.com/fabric8io/fabric8-hubot-scripts.git"
+  }, {
+    "description" : "The username for the Fabric8 Hubot bot",
+    "name" : "LETSCHAT_HUBOT_USERNAME",
+    "value" : "fabric8"
+  } ]
+}
