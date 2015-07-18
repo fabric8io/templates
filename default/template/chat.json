@@ -178,7 +178,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/hubot-notifier:2.2.9.1",
+            "image" : "docker.io/fabric8/hubot-notifier:2.2.11",
             "name" : "hubot-notifier",
             "ports" : [ {
               "containerPort" : 8778,

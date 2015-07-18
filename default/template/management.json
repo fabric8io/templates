@@ -214,7 +214,7 @@
             "args" : [ ],
             "command" : [ ],
             "env" : [ ],
-            "image" : "fabric8/elasticsearch-logstash-template:2.2.9.1",
+            "image" : "fabric8/elasticsearch-logstash-template:2.2.11",
             "name" : "logstash-template",
             "ports" : [ ],
             "volumeMounts" : [ ]
@@ -481,7 +481,7 @@
                 }
               }
             } ],
-            "image" : "fabric8/kibana-config:2.2.9.1",
+            "image" : "fabric8/kibana-config:2.2.11",
             "name" : "kibana-config",
             "ports" : [ ],
             "volumeMounts" : [ ]

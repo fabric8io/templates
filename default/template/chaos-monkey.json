@@ -72,7 +72,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/chaos-monkey:2.2.9.1",
+            "image" : "docker.io/fabric8/chaos-monkey:2.2.11",
             "name" : "chaos-monkey",
             "ports" : [ {
               "containerPort" : 8778,

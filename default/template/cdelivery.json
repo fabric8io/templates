@@ -446,7 +446,7 @@
             "args" : [ ],
             "command" : [ ],
             "env" : [ ],
-            "image" : "fabric8/elasticsearch-logstash-template:2.2.9.1",
+            "image" : "fabric8/elasticsearch-logstash-template:2.2.11",
             "name" : "logstash-template",
             "ports" : [ ],
             "volumeMounts" : [ ]
@@ -526,7 +526,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8-forge:2.2.9.1",
+            "image" : "docker.io/fabric8/fabric8-forge:2.2.11",
             "name" : "fabric8-forge",
             "ports" : [ {
               "containerPort" : 8778,
@@ -917,7 +917,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/hubot-notifier:2.2.9.1",
+            "image" : "docker.io/fabric8/hubot-notifier:2.2.11",
             "name" : "hubot-notifier",
             "ports" : [ {
               "containerPort" : 8778,
@@ -1013,10 +1013,13 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/jenkins-with-docker",
+            "image" : "fabric8/jenkernetes",
             "imagePullPolicy" : "IfNotPresent",
             "name" : "jenkins",
             "ports" : [ {
+              "containerPort" : 50000,
+              "name" : "slave"
+            }, {
               "containerPort" : 8080,
               "name" : "http"
             } ],
@@ -1024,7 +1027,7 @@
               "privileged" : true
             },
             "volumeMounts" : [ {
-              "mountPath" : "/var/jenkins_home/workspace",
+              "mountPath" : "/var/jenkins_home",
               "name" : "jenkins-workspace",
               "readOnly" : false
             }, {
@@ -1135,7 +1138,7 @@
                 }
               }
             } ],
-            "image" : "fabric8/kibana-config:2.2.9.1",
+            "image" : "fabric8/kibana-config:2.2.11",
             "name" : "kibana-config",
             "ports" : [ ],
             "volumeMounts" : [ ]

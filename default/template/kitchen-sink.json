@@ -584,7 +584,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/amqbroker:2.2.9.1",
+            "image" : "docker.io/fabric8/amqbroker:2.2.11",
             "name" : "amqbroker",
             "ports" : [ {
               "containerPort" : 6194,
@@ -639,7 +639,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/api-registry:2.2.9.1",
+            "image" : "docker.io/fabric8/api-registry:2.2.11",
             "name" : "api-registry",
             "ports" : [ {
               "containerPort" : 8080,
@@ -700,7 +700,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/apiman:2.2.9.1",
+            "image" : "docker.io/fabric8/apiman:2.2.11",
             "name" : "apiman",
             "ports" : [ {
               "containerPort" : 7070,
@@ -793,7 +793,7 @@
             "args" : [ ],
             "command" : [ ],
             "env" : [ ],
-            "image" : "fabric8/elasticsearch-logstash-template:2.2.9.1",
+            "image" : "fabric8/elasticsearch-logstash-template:2.2.11",
             "name" : "logstash-template",
             "ports" : [ ],
             "volumeMounts" : [ ]
@@ -873,7 +873,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8-forge:2.2.9.1",
+            "image" : "docker.io/fabric8/fabric8-forge:2.2.11",
             "name" : "fabric8-forge",
             "ports" : [ {
               "containerPort" : 8778,
@@ -953,7 +953,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8-http-gateway:2.2.9.1",
+            "image" : "docker.io/fabric8/fabric8-http-gateway:2.2.11",
             "name" : "fabric8-http-gateway",
             "ports" : [ {
               "containerPort" : 9000,
@@ -1033,7 +1033,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8mq:2.2.9.1",
+            "image" : "docker.io/fabric8/fabric8mq:2.2.11",
             "name" : "fabric8mq",
             "ports" : [ {
               "containerPort" : 6194,
@@ -1535,7 +1535,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/hubot-notifier:2.2.9.1",
+            "image" : "docker.io/fabric8/hubot-notifier:2.2.11",
             "name" : "hubot-notifier",
             "ports" : [ {
               "containerPort" : 8778,
@@ -1707,10 +1707,13 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/jenkins-with-docker",
+            "image" : "fabric8/jenkernetes",
             "imagePullPolicy" : "IfNotPresent",
             "name" : "jenkins",
             "ports" : [ {
+              "containerPort" : 50000,
+              "name" : "slave"
+            }, {
               "containerPort" : 8080,
               "name" : "http"
             } ],
@@ -1718,7 +1721,7 @@
               "privileged" : true
             },
             "volumeMounts" : [ {
-              "mountPath" : "/var/jenkins_home/workspace",
+              "mountPath" : "/var/jenkins_home",
               "name" : "jenkins-workspace",
               "readOnly" : false
             }, {
@@ -1829,7 +1832,7 @@
                 }
               }
             } ],
-            "image" : "fabric8/kibana-config:2.2.9.1",
+            "image" : "fabric8/kibana-config:2.2.11",
             "name" : "kibana-config",
             "ports" : [ ],
             "volumeMounts" : [ ]

@@ -80,7 +80,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/amqbroker:2.2.9.1",
+            "image" : "docker.io/fabric8/amqbroker:2.2.11",
             "name" : "amqbroker",
             "ports" : [ {
               "containerPort" : 6194,
@@ -147,7 +147,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8mq:2.2.9.1",
+            "image" : "docker.io/fabric8/fabric8mq:2.2.11",
             "name" : "fabric8mq",
             "ports" : [ {
               "containerPort" : 6194,

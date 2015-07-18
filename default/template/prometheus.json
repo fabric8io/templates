@@ -70,10 +70,10 @@
               "readOnly" : false
             } ]
           }, {
-            "args" : [ "-master=https://kubernetes.default.svc.cluster.local", "-nodes-file=/etc/prometheus/targets.d/nodes.yml" ],
+            "args" : [ "-master=https://kubernetes.default.svc.cluster.local", "-nodes-file=/etc/prometheus/targets.d/nodes.yml", "-insecure=true" ],
             "command" : [ ],
             "env" : [ ],
-            "image" : "docker.io/fabric8/prometheus-k8s-watcher:2.2.9.1",
+            "image" : "docker.io/fabric8/prometheus-k8s-watcher:2.2.11",
             "name" : "prometheus-k8s-watcher",
             "ports" : [ ],
             "volumeMounts" : [ {

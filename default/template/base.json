@@ -88,7 +88,7 @@
               "value" : "https://fabric8.${DOMAIN}"
             }, {
               "name" : "OAUTH_CLIENT_ID",
-              "value" : "fabric8"
+              "value" : "${OAUTH_CLIENT_ID}"
             }, {
               "name" : "GOOGLE_OAUTH_AUTHENTICATION_URI",
               "value" : "https://accounts.google.com/o/oauth2/auth"
@@ -109,7 +109,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8-console:v1.0.22",
+            "image" : "docker.io/fabric8/fabric8-console:v1.0.23",
             "name" : "fabric8-container",
             "ports" : [ {
               "containerPort" : 9090,
@@ -126,16 +126,13 @@
     }
   } ],
   "parameters" : [ {
+    "description" : "The OAuth client id if using OpenShift's OAuth provider",
+    "name" : "OAUTH_CLIENT_ID",
+    "value" : "fabric8"
+  }, {
     "description" : "Identifies the Google API access that your application is requesting. The values passed in this parameter inform the consent screen that is shown to the user.",
     "name" : "GOOGLE_OAUTH_SCOPE",
     "value" : "profile"
-  }, {
-    "description" : "The client ID obtained from the Developers Console",
-    "name" : "GOOGLE_OAUTH_CLIENT_ID"
-  }, {
-    "description" : "The domain name to append to the service name to access web applications",
-    "name" : "DOMAIN",
-    "value" : "vagrant.f8"
   }, {
     "description" : "The OAuth provider to use. Possible values are: openshift, google",
     "name" : "OAUTH_PROVIDER",
@@ -143,5 +140,12 @@
   }, {
     "description" : "The client secret obtained from the Developers Console",
     "name" : "GOOGLE_OAUTH_CLIENT_SECRET"
+  }, {
+    "description" : "The client ID obtained from the Developers Console",
+    "name" : "GOOGLE_OAUTH_CLIENT_ID"
+  }, {
+    "description" : "The domain name to append to the service name to access web applications",
+    "name" : "DOMAIN",
+    "value" : "vagrant.f8"
   } ]
 }

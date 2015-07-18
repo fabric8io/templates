@@ -184,7 +184,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/apiman:2.2.9.1",
+            "image" : "docker.io/fabric8/apiman:2.2.11",
             "name" : "apiman",
             "ports" : [ {
               "containerPort" : 7070,
@@ -277,7 +277,7 @@
             "args" : [ ],
             "command" : [ ],
             "env" : [ ],
-            "image" : "fabric8/elasticsearch-logstash-template:2.2.9.1",
+            "image" : "fabric8/elasticsearch-logstash-template:2.2.11",
             "name" : "logstash-template",
             "ports" : [ ],
             "volumeMounts" : [ ]
@@ -348,7 +348,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8-http-gateway:2.2.9.1",
+            "image" : "docker.io/fabric8/fabric8-http-gateway:2.2.11",
             "name" : "fabric8-http-gateway",
             "ports" : [ {
               "containerPort" : 9000,
@@ -446,7 +446,7 @@
                 }
               }
             } ],
-            "image" : "fabric8/kibana-config:2.2.9.1",
+            "image" : "fabric8/kibana-config:2.2.11",
             "name" : "kibana-config",
             "ports" : [ ],
             "volumeMounts" : [ ]
