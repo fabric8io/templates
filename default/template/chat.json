@@ -24,6 +24,29 @@
         "component" : "hubot-letschat",
         "provider" : "fabric8"
       },
+      "name" : "hubot-jenkins-notifier"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 5555,
+        "protocol" : "TCP",
+        "targetPort" : 5555
+      } ],
+      "selector" : {
+        "component" : "hubot-letschat",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "hubot-letschat",
+        "provider" : "fabric8"
+      },
       "name" : "hubot-web-hook"
     },
     "spec" : {
@@ -92,6 +115,12 @@
               "name" : "HUBOT_LCB_ROOMS",
               "value" : "${LETSCHAT_DEFAULT_ROOMS}"
             }, {
+              "name" : "HUBOT_GRAFANA_HOST",
+              "value" : "${HUBOT_GRAFANA_HOST}"
+            }, {
+              "name" : "HUBOT_GRAFANA_API_KEY",
+              "value" : "${HUBOT_GRAFANA_API_KEY}"
+            }, {
               "name" : "LETSCHAT_HUBOT_SCRIPTS",
               "value" : "${LETSCHAT_HUBOT_SCRIPTS}"
             }, {
@@ -111,7 +140,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/hubot-letschat",
+            "image" : "docker.io/fabric8/hubot-letschat:v1.0.0",
             "name" : "hubot-letschat",
             "ports" : [ {
               "containerPort" : 8080,
@@ -178,7 +207,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/hubot-notifier:2.2.11",
+            "image" : "docker.io/fabric8/hubot-notifier:2.2.14",
             "name" : "hubot-notifier",
             "ports" : [ {
               "containerPort" : 8778,
@@ -193,7 +222,7 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "fabric8",
+          "serviceAccountName" : "fabric8",
           "volumes" : [ {
             "name" : "openshift-cert-secrets",
             "secret" : {
@@ -306,12 +335,18 @@
     "name" : "LETSCHAT_HUBOT_PASSWORD",
     "value" : "RedHat$1"
   }, {
-    "description" : "Coffeescripts for hubot",
-    "name" : "LETSCHAT_HUBOT_SCRIPTS",
-    "value" : "https://github.com/fabric8io/fabric8-hubot-scripts.git"
+    "description" : "API key for a particular user",
+    "name" : "HUBOT_GRAFANA_API_KEY"
   }, {
     "description" : "The username for the Fabric8 Hubot bot",
     "name" : "LETSCHAT_HUBOT_USERNAME",
     "value" : "fabric8"
+  }, {
+    "description" : "Coffeescripts for hubot",
+    "name" : "LETSCHAT_HUBOT_SCRIPTS",
+    "value" : "https://github.com/fabric8io/fabric8-hubot-scripts.git"
+  }, {
+    "description" : "Host for your Grafana 2.0 install, e.g. 'http://play.grafana.org'",
+    "name" : "HUBOT_GRAFANA_HOST"
   } ]
 }

@@ -72,7 +72,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/chaos-monkey:2.2.11",
+            "image" : "docker.io/fabric8/chaos-monkey:2.2.14",
             "name" : "chaos-monkey",
             "ports" : [ {
               "containerPort" : 8778,
@@ -87,7 +87,7 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "fabric8",
+          "serviceAccountName" : "fabric8",
           "volumes" : [ {
             "name" : "openshift-cert-secrets",
             "secret" : {

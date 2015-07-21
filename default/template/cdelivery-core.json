@@ -66,8 +66,8 @@
       "name" : "elasticsearch-cluster"
     },
     "spec" : {
+      "clusterIP" : "None",
       "deprecatedPublicIPs" : [ ],
-      "portalIP" : "None",
       "ports" : [ {
         "name" : "",
         "port" : 9300,
@@ -331,7 +331,7 @@
             "args" : [ ],
             "command" : [ ],
             "env" : [ ],
-            "image" : "fabric8/elasticsearch-logstash-template:2.2.11",
+            "image" : "fabric8/elasticsearch-logstash-template:2.2.14",
             "name" : "logstash-template",
             "ports" : [ ],
             "volumeMounts" : [ ]
@@ -462,7 +462,7 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "fabric8",
+          "serviceAccountName" : "fabric8",
           "volumes" : [ {
             "hostPath" : {
               "path" : "/home/gerrit/admin-ssh-key/id_rsa.pub"
@@ -624,6 +624,9 @@
               "name" : "JENKINS_WORKFLOW_GIT_REPOSITORY",
               "value" : "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
             }, {
+              "name" : "FABRIC8_DEFAULT_ENVIRONMENTS",
+              "value" : "${FABRIC8_DEFAULT_ENVIRONMENTS}"
+            }, {
               "name" : "KUBERNETES_CLIENT_KEY_FILE",
               "value" : "/etc/secret-volume/admin-key"
             }, {
@@ -642,11 +645,17 @@
               "name" : "JENKINS_GOGS_EMAIL",
               "value" : "${JENKINS_GOGS_EMAIL}"
             }, {
+              "name" : "DOMAIN",
+              "value" : "${DOMAIN}"
+            }, {
               "name" : "SEED_GIT_URL",
               "value" : "${SEED_GIT_URL}"
             }, {
               "name" : "JENKINS_SLAVE_IMAGE",
               "value" : "${JENKINS_SLAVE_IMAGE}"
+            }, {
+              "name" : "FABRIC8_CONSOLE",
+              "value" : "http://fabric8.${DOMAIN}"
             }, {
               "name" : "KUBERNETES_NAMESPACE",
               "valueFrom" : {
@@ -695,7 +704,7 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "fabric8",
+          "serviceAccountName" : "fabric8",
           "volumes" : [ {
             "hostPath" : {
               "path" : "/home/jenkins/ssh-keys"
@@ -787,7 +796,7 @@
                 }
               }
             } ],
-            "image" : "fabric8/kibana-config:2.2.11",
+            "image" : "fabric8/kibana-config:2.2.14",
             "name" : "kibana-config",
             "ports" : [ ],
             "volumeMounts" : [ ]
@@ -942,6 +951,10 @@
     "description" : "The docker image used for jenkins slave when using the Docker Cloud",
     "name" : "JENKINS_SLAVE_IMAGE",
     "value" : "fabric8/jenkins-slave"
+  }, {
+    "description" : "The list of default environment names to actual kubernetes namespaces",
+    "name" : "FABRIC8_DEFAULT_ENVIRONMENTS",
+    "value" : "Staging=${buildName}-staging,Production=${buildName}-prod"
   }, {
     "description" : "The git clone URL for the jenkins workflow repository which can be reused across projects",
     "name" : "JENKINS_WORKFLOW_GIT_REPOSITORY",

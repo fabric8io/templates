@@ -76,8 +76,8 @@
       "name" : "elasticsearch-cluster"
     },
     "spec" : {
+      "clusterIP" : "None",
       "deprecatedPublicIPs" : [ ],
-      "portalIP" : "None",
       "ports" : [ {
         "name" : "",
         "port" : 9300,
@@ -184,7 +184,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/apiman:2.2.11",
+            "image" : "docker.io/fabric8/apiman:2.2.14",
             "name" : "apiman",
             "ports" : [ {
               "containerPort" : 7070,
@@ -277,7 +277,7 @@
             "args" : [ ],
             "command" : [ ],
             "env" : [ ],
-            "image" : "fabric8/elasticsearch-logstash-template:2.2.11",
+            "image" : "fabric8/elasticsearch-logstash-template:2.2.14",
             "name" : "logstash-template",
             "ports" : [ ],
             "volumeMounts" : [ ]
@@ -348,7 +348,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8-http-gateway:2.2.11",
+            "image" : "docker.io/fabric8/fabric8-http-gateway:2.2.14",
             "name" : "fabric8-http-gateway",
             "ports" : [ {
               "containerPort" : 9000,
@@ -369,7 +369,7 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "fabric8",
+          "serviceAccountName" : "fabric8",
           "volumes" : [ {
             "name" : "openshift-cert-secrets",
             "secret" : {
@@ -446,7 +446,7 @@
                 }
               }
             } ],
-            "image" : "fabric8/kibana-config:2.2.11",
+            "image" : "fabric8/kibana-config:2.2.14",
             "name" : "kibana-config",
             "ports" : [ ],
             "volumeMounts" : [ ]

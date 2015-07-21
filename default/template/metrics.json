@@ -166,7 +166,7 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "metrics",
+          "serviceAccountName" : "metrics",
           "volumes" : [ ]
         }
       }

@@ -109,7 +109,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8-console:v1.0.23",
+            "image" : "docker.io/fabric8/fabric8-console:v1.0.25",
             "name" : "fabric8-container",
             "ports" : [ {
               "containerPort" : 9090,

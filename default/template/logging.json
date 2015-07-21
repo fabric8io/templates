@@ -47,8 +47,8 @@
       "name" : "elasticsearch-cluster"
     },
     "spec" : {
+      "clusterIP" : "None",
       "deprecatedPublicIPs" : [ ],
-      "portalIP" : "None",
       "ports" : [ {
         "name" : "",
         "port" : 9300,
@@ -158,7 +158,7 @@
             "args" : [ ],
             "command" : [ ],
             "env" : [ ],
-            "image" : "fabric8/elasticsearch-logstash-template:2.2.11",
+            "image" : "fabric8/elasticsearch-logstash-template:2.2.14",
             "name" : "logstash-template",
             "ports" : [ ],
             "volumeMounts" : [ ]
@@ -241,7 +241,7 @@
                 }
               }
             } ],
-            "image" : "fabric8/kibana-config:2.2.11",
+            "image" : "fabric8/kibana-config:2.2.14",
             "name" : "kibana-config",
             "ports" : [ ],
             "volumeMounts" : [ ]

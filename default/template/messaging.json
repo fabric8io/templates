@@ -80,7 +80,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/amqbroker:2.2.11",
+            "image" : "docker.io/fabric8/amqbroker:2.2.14",
             "name" : "amqbroker",
             "ports" : [ {
               "containerPort" : 6194,
@@ -147,7 +147,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8mq:2.2.11",
+            "image" : "docker.io/fabric8/fabric8mq:2.2.14",
             "name" : "fabric8mq",
             "ports" : [ {
               "containerPort" : 6194,
@@ -165,7 +165,7 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "fabric8",
+          "serviceAccountName" : "fabric8",
           "volumes" : [ {
             "name" : "openshift-cert-secrets",
             "secret" : {

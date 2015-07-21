@@ -73,7 +73,7 @@
             "args" : [ "-master=https://kubernetes.default.svc.cluster.local", "-nodes-file=/etc/prometheus/targets.d/nodes.yml", "-insecure=true" ],
             "command" : [ ],
             "env" : [ ],
-            "image" : "docker.io/fabric8/prometheus-k8s-watcher:2.2.11",
+            "image" : "docker.io/fabric8/prometheus-k8s-watcher:2.2.14",
             "name" : "prometheus-k8s-watcher",
             "ports" : [ ],
             "volumeMounts" : [ {
@@ -83,7 +83,7 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "metrics",
+          "serviceAccountName" : "metrics",
           "volumes" : [ {
             "emptyDir" : {
               "medium" : ""

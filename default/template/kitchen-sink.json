@@ -73,6 +73,15 @@
     "redirectURIs" : [ "http://localhost:3000", "http://gogs.${DOMAIN}", "https://gogs.${DOMAIN}" ]
   }, {
     "apiVersion" : "v1",
+    "kind" : "OAuthClient",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : { },
+      "name" : "gogs"
+    },
+    "redirectURIs" : [ "http://localhost:3000", "http://gogs.${DOMAIN}", "https://gogs.${DOMAIN}" ]
+  }, {
+    "apiVersion" : "v1",
     "kind" : "Service",
     "metadata" : {
       "annotations" : { },
@@ -147,12 +156,81 @@
     "kind" : "Service",
     "metadata" : {
       "annotations" : { },
+      "labels" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      },
+      "name" : "elasticsearch"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 9200,
+        "protocol" : "TCP",
+        "targetPort" : 9200
+      } ],
+      "selector" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      },
+      "name" : "elasticsearch"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 9200,
+        "protocol" : "TCP",
+        "targetPort" : 9200
+      } ],
+      "selector" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      },
+      "name" : "elasticsearch"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 9200,
+        "protocol" : "TCP",
+        "targetPort" : 9200
+      } ],
+      "selector" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
       "labels" : { },
       "name" : "elasticsearch-cluster"
     },
     "spec" : {
+      "clusterIP" : "None",
       "deprecatedPublicIPs" : [ ],
-      "portalIP" : "None",
       "ports" : [ {
         "name" : "",
         "port" : 9300,
@@ -161,6 +239,95 @@
       } ],
       "selector" : {
         "component" : "elasticsearch",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : { },
+      "name" : "elasticsearch-cluster"
+    },
+    "spec" : {
+      "clusterIP" : "None",
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "name" : "",
+        "port" : 9300,
+        "protocol" : "TCP",
+        "targetPort" : 9300
+      } ],
+      "selector" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : { },
+      "name" : "elasticsearch-cluster"
+    },
+    "spec" : {
+      "clusterIP" : "None",
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "name" : "",
+        "port" : 9300,
+        "protocol" : "TCP",
+        "targetPort" : 9300
+      } ],
+      "selector" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : { },
+      "name" : "elasticsearch-cluster"
+    },
+    "spec" : {
+      "clusterIP" : "None",
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "name" : "",
+        "port" : 9300,
+        "protocol" : "TCP",
+        "targetPort" : 9300
+      } ],
+      "selector" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "fabric8Forge",
+        "provider" : "fabric8"
+      },
+      "name" : "fabric8-forge"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "protocol" : "TCP",
+        "targetPort" : 8080
+      } ],
+      "selector" : {
+        "component" : "fabric8Forge",
         "provider" : "fabric8"
       }
     }
@@ -273,6 +440,29 @@
         "component" : "gerrit",
         "provider" : "fabric8"
       },
+      "name" : "gerrit"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "protocol" : "TCP",
+        "targetPort" : 8080
+      } ],
+      "selector" : {
+        "component" : "gerrit",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "gerrit",
+        "provider" : "fabric8"
+      },
       "name" : "gerrit-ssh"
     },
     "spec" : {
@@ -284,6 +474,52 @@
       } ],
       "selector" : {
         "component" : "gerrit",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "gerrit",
+        "provider" : "fabric8"
+      },
+      "name" : "gerrit-ssh"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 29418,
+        "protocol" : "TCP",
+        "targetPort" : 29418
+      } ],
+      "selector" : {
+        "component" : "gerrit",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "gogs",
+        "provider" : "fabric8"
+      },
+      "name" : "gogs"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "protocol" : "TCP",
+        "targetPort" : 3000
+      } ],
+      "selector" : {
+        "component" : "gogs",
         "provider" : "fabric8"
       }
     }
@@ -339,6 +575,29 @@
     "metadata" : {
       "annotations" : { },
       "labels" : {
+        "component" : "gogs",
+        "provider" : "fabric8"
+      },
+      "name" : "gogs-ssh"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 22,
+        "protocol" : "TCP",
+        "targetPort" : 22
+      } ],
+      "selector" : {
+        "component" : "gogs",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
         "component" : "grafana",
         "provider" : "fabric8"
       },
@@ -353,6 +612,75 @@
       } ],
       "selector" : {
         "component" : "grafana",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "hubot-letschat",
+        "provider" : "fabric8"
+      },
+      "name" : "hubot-jenkins-notifier"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 5555,
+        "protocol" : "TCP",
+        "targetPort" : 5555
+      } ],
+      "selector" : {
+        "component" : "hubot-letschat",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "hubot-letschat",
+        "provider" : "fabric8"
+      },
+      "name" : "hubot-jenkins-notifier"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 5555,
+        "protocol" : "TCP",
+        "targetPort" : 5555
+      } ],
+      "selector" : {
+        "component" : "hubot-letschat",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "hubot-letschat",
+        "provider" : "fabric8"
+      },
+      "name" : "hubot-web-hook"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 8080,
+        "protocol" : "TCP",
+        "targetPort" : 8080
+      } ],
+      "selector" : {
+        "component" : "hubot-letschat",
         "provider" : "fabric8"
       }
     }
@@ -431,6 +759,98 @@
     "metadata" : {
       "annotations" : { },
       "labels" : {
+        "component" : "jenkins",
+        "provider" : "fabric8"
+      },
+      "name" : "jenkins"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "protocol" : "TCP",
+        "targetPort" : 8080
+      } ],
+      "selector" : {
+        "component" : "jenkins",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "kibana",
+        "provider" : "fabric8"
+      },
+      "name" : "kibana"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "protocol" : "TCP",
+        "targetPort" : 5601
+      } ],
+      "selector" : {
+        "component" : "kibana",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "kibana",
+        "provider" : "fabric8"
+      },
+      "name" : "kibana"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "protocol" : "TCP",
+        "targetPort" : 5601
+      } ],
+      "selector" : {
+        "component" : "kibana",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "kibana",
+        "provider" : "fabric8"
+      },
+      "name" : "kibana"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "protocol" : "TCP",
+        "targetPort" : 5601
+      } ],
+      "selector" : {
+        "component" : "kibana",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
         "component" : "kibana",
         "provider" : "fabric8"
       },
@@ -464,6 +884,47 @@
       } ],
       "selector" : {
         "name" : "letschat"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : { },
+      "name" : "letschat"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "targetPort" : 5000
+      } ],
+      "selector" : {
+        "name" : "letschat"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "nexus",
+        "provider" : "fabric8"
+      },
+      "name" : "nexus"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "protocol" : "TCP",
+        "targetPort" : 8081
+      } ],
+      "selector" : {
+        "component" : "nexus",
+        "provider" : "fabric8"
       }
     }
   }, {
@@ -516,6 +977,29 @@
     "apiVersion" : "v1",
     "kind" : "Service",
     "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "orion",
+        "provider" : "fabric8"
+      },
+      "name" : "orion"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "protocol" : "TCP",
+        "targetPort" : 8080
+      } ],
+      "selector" : {
+        "component" : "orion",
+        "provider" : "fabric8"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
       "name" : "sonarqube"
     },
     "spec" : {
@@ -526,6 +1010,38 @@
       } ],
       "selector" : {
         "name" : "sonarqube"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "name" : "sonarqube"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 8080,
+        "targetPort" : 9000
+      } ],
+      "selector" : {
+        "name" : "sonarqube"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "name" : "taiga"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 8080,
+        "targetPort" : 80
+      } ],
+      "selector" : {
+        "name" : "taiga"
       }
     }
   }, {
@@ -584,7 +1100,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/amqbroker:2.2.11",
+            "image" : "docker.io/fabric8/amqbroker:2.2.14",
             "name" : "amqbroker",
             "ports" : [ {
               "containerPort" : 6194,
@@ -639,7 +1155,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/api-registry:2.2.11",
+            "image" : "docker.io/fabric8/api-registry:2.2.14",
             "name" : "api-registry",
             "ports" : [ {
               "containerPort" : 8080,
@@ -700,7 +1216,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/apiman:2.2.11",
+            "image" : "docker.io/fabric8/apiman:2.2.14",
             "name" : "apiman",
             "ports" : [ {
               "containerPort" : 7070,
@@ -793,7 +1309,280 @@
             "args" : [ ],
             "command" : [ ],
             "env" : [ ],
-            "image" : "fabric8/elasticsearch-logstash-template:2.2.11",
+            "image" : "fabric8/elasticsearch-logstash-template:2.2.14",
+            "name" : "logstash-template",
+            "ports" : [ ],
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ {
+            "emptyDir" : {
+              "medium" : ""
+            },
+            "name" : "elasticsearch-data"
+          } ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      },
+      "name" : "elasticsearch"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "elasticsearch",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "SERVICE_DNS",
+              "value" : "elasticsearch-cluster"
+            }, {
+              "name" : "KUBERNETES_TRUST_CERT",
+              "value" : "true"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/elasticsearch-k8s:1.5.2",
+            "livenessProbe" : {
+              "initialDelaySeconds" : 60,
+              "tcpSocket" : {
+                "port" : 9300
+              }
+            },
+            "name" : "elasticsearch",
+            "ports" : [ {
+              "containerPort" : 9200,
+              "name" : "http"
+            }, {
+              "containerPort" : 9300,
+              "name" : "transport"
+            } ],
+            "readinessProbe" : {
+              "httpGet" : {
+                "path" : "/_template/logstash",
+                "port" : 9200
+              },
+              "initialDelaySeconds" : 60
+            },
+            "securityContext" : { },
+            "volumeMounts" : [ {
+              "mountPath" : "/usr/share/elasticsearch/data",
+              "name" : "elasticsearch-data",
+              "readOnly" : false
+            } ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ ],
+            "image" : "fabric8/elasticsearch-logstash-template:2.2.14",
+            "name" : "logstash-template",
+            "ports" : [ ],
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ {
+            "emptyDir" : {
+              "medium" : ""
+            },
+            "name" : "elasticsearch-data"
+          } ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      },
+      "name" : "elasticsearch"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "elasticsearch",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "SERVICE_DNS",
+              "value" : "elasticsearch-cluster"
+            }, {
+              "name" : "KUBERNETES_TRUST_CERT",
+              "value" : "true"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/elasticsearch-k8s:1.5.2",
+            "livenessProbe" : {
+              "initialDelaySeconds" : 60,
+              "tcpSocket" : {
+                "port" : 9300
+              }
+            },
+            "name" : "elasticsearch",
+            "ports" : [ {
+              "containerPort" : 9200,
+              "name" : "http"
+            }, {
+              "containerPort" : 9300,
+              "name" : "transport"
+            } ],
+            "readinessProbe" : {
+              "httpGet" : {
+                "path" : "/_template/logstash",
+                "port" : 9200
+              },
+              "initialDelaySeconds" : 60
+            },
+            "securityContext" : { },
+            "volumeMounts" : [ {
+              "mountPath" : "/usr/share/elasticsearch/data",
+              "name" : "elasticsearch-data",
+              "readOnly" : false
+            } ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ ],
+            "image" : "fabric8/elasticsearch-logstash-template:2.2.14",
+            "name" : "logstash-template",
+            "ports" : [ ],
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ {
+            "emptyDir" : {
+              "medium" : ""
+            },
+            "name" : "elasticsearch-data"
+          } ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      },
+      "name" : "elasticsearch"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "elasticsearch",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "elasticsearch",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "SERVICE_DNS",
+              "value" : "elasticsearch-cluster"
+            }, {
+              "name" : "KUBERNETES_TRUST_CERT",
+              "value" : "true"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/elasticsearch-k8s:1.5.2",
+            "livenessProbe" : {
+              "initialDelaySeconds" : 60,
+              "tcpSocket" : {
+                "port" : 9300
+              }
+            },
+            "name" : "elasticsearch",
+            "ports" : [ {
+              "containerPort" : 9200,
+              "name" : "http"
+            }, {
+              "containerPort" : 9300,
+              "name" : "transport"
+            } ],
+            "readinessProbe" : {
+              "httpGet" : {
+                "path" : "/_template/logstash",
+                "port" : 9200
+              },
+              "initialDelaySeconds" : 60
+            },
+            "securityContext" : { },
+            "volumeMounts" : [ {
+              "mountPath" : "/usr/share/elasticsearch/data",
+              "name" : "elasticsearch-data",
+              "readOnly" : false
+            } ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ ],
+            "image" : "fabric8/elasticsearch-logstash-template:2.2.14",
             "name" : "logstash-template",
             "ports" : [ ],
             "volumeMounts" : [ ]
@@ -845,6 +1634,9 @@
               "name" : "JENKINS_WORKFLOW_GIT_REPOSITORY",
               "value" : "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
             }, {
+              "name" : "FABRIC8_DEFAULT_ENVIRONMENTS",
+              "value" : "${FABRIC8_DEFAULT_ENVIRONMENTS}"
+            }, {
               "name" : "KUBERNETES_CLIENT_KEY_FILE",
               "value" : "/etc/secret-volume/admin-key"
             }, {
@@ -873,7 +1665,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8-forge:2.2.11",
+            "image" : "docker.io/fabric8/fabric8-forge:2.2.14",
             "name" : "fabric8-forge",
             "ports" : [ {
               "containerPort" : 8778,
@@ -888,7 +1680,99 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "fabric8",
+          "serviceAccountName" : "fabric8",
+          "volumes" : [ {
+            "name" : "openshift-cert-secrets",
+            "secret" : {
+              "secretName" : "openshift-cert-secrets"
+            }
+          } ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "fabric8Forge",
+        "provider" : "fabric8"
+      },
+      "name" : "fabric8-forge"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "fabric8Forge",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "fabric8Forge",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "SKIP_TLS_VERIFY",
+              "value" : "true"
+            }, {
+              "name" : "JENKINS_WORKFLOW_GIT_REPOSITORY",
+              "value" : "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
+            }, {
+              "name" : "FABRIC8_DEFAULT_ENVIRONMENTS",
+              "value" : "${FABRIC8_DEFAULT_ENVIRONMENTS}"
+            }, {
+              "name" : "KUBERNETES_CLIENT_KEY_FILE",
+              "value" : "/etc/secret-volume/admin-key"
+            }, {
+              "name" : "JENKINS_GOGS_PASSWORD",
+              "value" : "${JENKINS_GOGS_PASSWORD}"
+            }, {
+              "name" : "JENKINS_SEED_JOB",
+              "value" : "seed"
+            }, {
+              "name" : "KUBERNETES_CLIENT_CERTIFICATE_FILE",
+              "value" : "/etc/secret-volume/admin-cert"
+            }, {
+              "name" : "KUBERNETES_TRUST_CERT",
+              "value" : "true"
+            }, {
+              "name" : "JENKINS_GOGS_USER",
+              "value" : "${JENKINS_GOGS_USER}"
+            }, {
+              "name" : "JENKINS_GOGS_EMAIL",
+              "value" : "${JENKINS_GOGS_EMAIL}"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/fabric8-forge:2.2.14",
+            "name" : "fabric8-forge",
+            "ports" : [ {
+              "containerPort" : 8778,
+              "name" : "jolokia"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ {
+              "mountPath" : "/etc/secret-volume",
+              "name" : "openshift-cert-secrets",
+              "readOnly" : false
+            } ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "serviceAccountName" : "fabric8",
           "volumes" : [ {
             "name" : "openshift-cert-secrets",
             "secret" : {
@@ -953,7 +1837,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8-http-gateway:2.2.11",
+            "image" : "docker.io/fabric8/fabric8-http-gateway:2.2.14",
             "name" : "fabric8-http-gateway",
             "ports" : [ {
               "containerPort" : 9000,
@@ -974,7 +1858,7 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "fabric8",
+          "serviceAccountName" : "fabric8",
           "volumes" : [ {
             "name" : "openshift-cert-secrets",
             "secret" : {
@@ -1033,7 +1917,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8mq:2.2.11",
+            "image" : "docker.io/fabric8/fabric8mq:2.2.14",
             "name" : "fabric8mq",
             "ports" : [ {
               "containerPort" : 6194,
@@ -1051,7 +1935,7 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "fabric8",
+          "serviceAccountName" : "fabric8",
           "volumes" : [ {
             "name" : "openshift-cert-secrets",
             "secret" : {
@@ -1176,7 +2060,7 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "fabric8",
+          "serviceAccountName" : "fabric8",
           "volumes" : [ {
             "hostPath" : {
               "path" : "/home/gerrit/admin-ssh-key/id_rsa.pub"
@@ -1198,6 +2082,250 @@
             },
             "name" : "gerrit-users-ssh-key"
           } ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "gerrit",
+        "provider" : "fabric8"
+      },
+      "name" : "gerrit"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "gerrit",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "gerrit",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "GERRIT_GIT_REMOTEPATH",
+              "value" : "ssh://admin@localhost:29418/All-Projects"
+            }, {
+              "name" : "GERRIT_ACCOUNTS",
+              "value" : "jenkins,jenkins,jenkins@fabric8.io,secret,Non-Interactive Users:Administrators;sonar,sonar,sonar@fabric8.io,secret,Non-Interactive Users"
+            }, {
+              "name" : "GERRIT_SSH_PATH",
+              "value" : "/home/gerrit/ssh-keys"
+            }, {
+              "name" : "GERRIT_GIT_LOCALPATH",
+              "value" : "/home/gerrit/git"
+            }, {
+              "name" : "GIT_SERVER_USER",
+              "value" : "gogsadmin"
+            }, {
+              "name" : "GERRIT_ADMIN_FULLNAME",
+              "value" : "Administrator"
+            }, {
+              "name" : "GIT_SERVER_PROJ_ROOT",
+              "value" : "gogsadmin"
+            }, {
+              "name" : "GIT_SERVER_IP",
+              "value" : "gogs.default.svc.cluster.local"
+            }, {
+              "name" : "AUTH_TYPE",
+              "value" : "DEVELOPMENT_BECOME_ANY_ACCOUNT"
+            }, {
+              "name" : "GERRIT_GIT_PROJECT_CONFIG",
+              "value" : "/home/gerrit/configs/project.config"
+            }, {
+              "name" : "GERRIT_ADMIN_EMAIL",
+              "value" : "admin@fabric8.io"
+            }, {
+              "name" : "GIT_SERVER_PASSWORD",
+              "value" : "RedHat$1"
+            }, {
+              "name" : "GERRIT_ADMIN_PWD",
+              "value" : "secret"
+            }, {
+              "name" : "GIT_SERVER_PORT",
+              "value" : "80"
+            }, {
+              "name" : "GERRIT_ADMIN_USER",
+              "value" : "admin"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/gerrit",
+            "imagePullPolicy" : "IfNotPresent",
+            "name" : "gerrit",
+            "ports" : [ {
+              "containerPort" : 8080,
+              "name" : "http"
+            }, {
+              "containerPort" : 8778,
+              "name" : "jolokia"
+            } ],
+            "securityContext" : {
+              "privileged" : true
+            },
+            "volumeMounts" : [ {
+              "mountPath" : "/home/gerrit/ssh-keys",
+              "name" : "gerrit-users-ssh-key",
+              "readOnly" : false
+            }, {
+              "mountPath" : "/home/gerrit/site",
+              "name" : "gerrit-workspace",
+              "readOnly" : false
+            }, {
+              "mountPath" : "/root/.ssh/id_rsa",
+              "name" : "gerrit-admin-ssh-private-key",
+              "readOnly" : false
+            }, {
+              "mountPath" : "/root/.ssh/id_rsa.pub",
+              "name" : "gerrit-admin-ssh-public-key",
+              "readOnly" : false
+            } ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "serviceAccountName" : "fabric8",
+          "volumes" : [ {
+            "hostPath" : {
+              "path" : "/home/gerrit/admin-ssh-key/id_rsa.pub"
+            },
+            "name" : "gerrit-admin-ssh-public-key"
+          }, {
+            "hostPath" : {
+              "path" : "/home/gerrit-site"
+            },
+            "name" : "gerrit-workspace"
+          }, {
+            "hostPath" : {
+              "path" : "/home/gerrit/admin-ssh-key/id_rsa"
+            },
+            "name" : "gerrit-admin-ssh-private-key"
+          }, {
+            "hostPath" : {
+              "path" : "/home/gerrit/ssh-keys"
+            },
+            "name" : "gerrit-users-ssh-key"
+          } ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "gogs",
+        "provider" : "fabric8"
+      },
+      "name" : "gogs"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "gogs",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "gogs",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "GOGS_SERVER__ROOT_URL",
+              "value" : "${GOGS_SERVER_PROTOCOL}://${GOGS_SERVER_DOMAIN}"
+            }, {
+              "name" : "GOGS_SERVER__DOMAIN",
+              "value" : "${GOGS_SERVER_DOMAIN}"
+            }, {
+              "name" : "ADMIN_USER_CREATE",
+              "value" : "true"
+            }, {
+              "name" : "GOGS_OAUTH_OPENSHIFT__CLIENT_ID",
+              "value" : "gogs"
+            }, {
+              "name" : "GOGS_OAUTH_OPENSHIFT__SCOPES",
+              "value" : "https://${DOMAIN}:8443/console/user"
+            }, {
+              "name" : "GOGS_OAUTH_OPENSHIFT__AUTH_URL",
+              "value" : "https://${DOMAIN}:8443/oauth/authorize"
+            }, {
+              "name" : "GOGS_OAUTH_OPENSHIFT__ENABLED",
+              "value" : "true"
+            }, {
+              "name" : "GOGS_WEBHOOK__SKIP_TLS_VERIFY",
+              "value" : "true"
+            }, {
+              "name" : "ADMIN_USER_PASSWORD",
+              "value" : "${JENKINS_GOGS_PASSWORD}"
+            }, {
+              "name" : "GOGS_WEBHOOK__TASK_INTERVAL",
+              "value" : "true"
+            }, {
+              "name" : "GOGS_OAUTH_TWITTER__ENABLED",
+              "value" : "false"
+            }, {
+              "name" : "ADMIN_USER_NAME",
+              "value" : "${JENKINS_GOGS_USER}"
+            }, {
+              "name" : "GOGS_SERVER__PROTOCOL",
+              "value" : "${GOGS_SERVER_PROTOCOL}"
+            }, {
+              "name" : "ADMIN_USER_EMAIL",
+              "value" : "${JENKINS_GOGS_EMAIL}"
+            }, {
+              "name" : "GOGS_OAUTH__ENABLED",
+              "value" : "true"
+            }, {
+              "name" : "GOGS_OAUTH_OPENSHIFT__TOKEN_URL",
+              "value" : "https://${DOMAIN}:8443/oauth/token"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/gogs",
+            "imagePullPolicy" : "IfNotPresent",
+            "name" : "gogs",
+            "ports" : [ {
+              "containerPort" : 3000,
+              "name" : "http"
+            }, {
+              "containerPort" : 22,
+              "name" : "ssh"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
         }
       }
     }
@@ -1408,7 +2536,7 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "metrics",
+          "serviceAccountName" : "metrics",
           "volumes" : [ ]
         }
       }
@@ -1449,6 +2577,12 @@
               "name" : "HUBOT_LCB_ROOMS",
               "value" : "${LETSCHAT_DEFAULT_ROOMS}"
             }, {
+              "name" : "HUBOT_GRAFANA_HOST",
+              "value" : "${HUBOT_GRAFANA_HOST}"
+            }, {
+              "name" : "HUBOT_GRAFANA_API_KEY",
+              "value" : "${HUBOT_GRAFANA_API_KEY}"
+            }, {
               "name" : "LETSCHAT_HUBOT_SCRIPTS",
               "value" : "${LETSCHAT_HUBOT_SCRIPTS}"
             }, {
@@ -1468,7 +2602,83 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/hubot-letschat",
+            "image" : "docker.io/fabric8/hubot-letschat:v1.0.0",
+            "name" : "hubot-letschat",
+            "ports" : [ {
+              "containerPort" : 8080,
+              "name" : "http"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "hubot-letschat",
+        "provider" : "fabric8"
+      },
+      "name" : "hubot-letschat"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "hubot-letschat",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "hubot-letschat",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "LETSCHAT_HUBOT_USERNAME",
+              "value" : "${LETSCHAT_HUBOT_USERNAME}"
+            }, {
+              "name" : "HUBOT_LCB_ROOMS",
+              "value" : "${LETSCHAT_DEFAULT_ROOMS}"
+            }, {
+              "name" : "HUBOT_GRAFANA_HOST",
+              "value" : "${HUBOT_GRAFANA_HOST}"
+            }, {
+              "name" : "HUBOT_GRAFANA_API_KEY",
+              "value" : "${HUBOT_GRAFANA_API_KEY}"
+            }, {
+              "name" : "LETSCHAT_HUBOT_SCRIPTS",
+              "value" : "${LETSCHAT_HUBOT_SCRIPTS}"
+            }, {
+              "name" : "HUBOT_LOG_LEVEL",
+              "value" : "true"
+            }, {
+              "name" : "HUBOT_LCB_TOKEN",
+              "value" : "${LETSCHAT_HUBOT_TOKEN}"
+            }, {
+              "name" : "LETSCHAT_HUBOT_PASSWORD",
+              "value" : "${LETSCHAT_HUBOT_PASSWORD}"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/hubot-letschat:v1.0.0",
             "name" : "hubot-letschat",
             "ports" : [ {
               "containerPort" : 8080,
@@ -1535,7 +2745,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/hubot-notifier:2.2.11",
+            "image" : "docker.io/fabric8/hubot-notifier:2.2.14",
             "name" : "hubot-notifier",
             "ports" : [ {
               "containerPort" : 8778,
@@ -1550,7 +2760,84 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "fabric8",
+          "serviceAccountName" : "fabric8",
+          "volumes" : [ {
+            "name" : "openshift-cert-secrets",
+            "secret" : {
+              "secretName" : "openshift-cert-secrets"
+            }
+          } ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "hubotNotifier",
+        "provider" : "fabric8"
+      },
+      "name" : "hubot-notifier"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "hubotNotifier",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "hubotNotifier",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "SKIP_TLS_VERIFY",
+              "value" : "true"
+            }, {
+              "name" : "HUBOT_KUBERNETES_ROOM",
+              "value" : "#fabric8_${namespace}"
+            }, {
+              "name" : "KUBERNETES_SERVICE_HOST",
+              "value" : "kubernetes.default.svc.${KUBERNETES_DNS_DOMAIN}"
+            }, {
+              "name" : "KUBERNETES_DISABLE_HOSTNAME_CHECK",
+              "value" : "true"
+            }, {
+              "name" : "KUBERNETES_TRUST_CERT",
+              "value" : "true"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/hubot-notifier:2.2.14",
+            "name" : "hubot-notifier",
+            "ports" : [ {
+              "containerPort" : 8778,
+              "name" : "jolokia"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ {
+              "mountPath" : "/etc/secret-volume",
+              "name" : "openshift-cert-secrets",
+              "readOnly" : false
+            } ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "serviceAccountName" : "fabric8",
           "volumes" : [ {
             "name" : "openshift-cert-secrets",
             "secret" : {
@@ -1669,6 +2956,9 @@
               "name" : "JENKINS_WORKFLOW_GIT_REPOSITORY",
               "value" : "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
             }, {
+              "name" : "FABRIC8_DEFAULT_ENVIRONMENTS",
+              "value" : "${FABRIC8_DEFAULT_ENVIRONMENTS}"
+            }, {
               "name" : "KUBERNETES_CLIENT_KEY_FILE",
               "value" : "/etc/secret-volume/admin-key"
             }, {
@@ -1687,11 +2977,17 @@
               "name" : "JENKINS_GOGS_EMAIL",
               "value" : "${JENKINS_GOGS_EMAIL}"
             }, {
+              "name" : "DOMAIN",
+              "value" : "${DOMAIN}"
+            }, {
               "name" : "SEED_GIT_URL",
               "value" : "${SEED_GIT_URL}"
             }, {
               "name" : "JENKINS_SLAVE_IMAGE",
               "value" : "${JENKINS_SLAVE_IMAGE}"
+            }, {
+              "name" : "FABRIC8_CONSOLE",
+              "value" : "http://fabric8.${DOMAIN}"
             }, {
               "name" : "KUBERNETES_NAMESPACE",
               "valueFrom" : {
@@ -1740,7 +3036,145 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
-          "serviceAccount" : "fabric8",
+          "serviceAccountName" : "fabric8",
+          "volumes" : [ {
+            "hostPath" : {
+              "path" : "/home/jenkins/ssh-keys"
+            },
+            "name" : "jenkis-master-key"
+          }, {
+            "name" : "openshift-cert-secrets",
+            "secret" : {
+              "secretName" : "openshift-cert-secrets"
+            }
+          }, {
+            "hostPath" : {
+              "path" : "/var/run/docker.sock"
+            },
+            "name" : "docker-socket"
+          }, {
+            "emptyDir" : {
+              "medium" : ""
+            },
+            "name" : "jenkins-workspace"
+          } ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "jenkins",
+        "provider" : "fabric8"
+      },
+      "name" : "jenkins"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "jenkins",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "jenkins",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "JENKINS_WORKFLOW_GIT_REPOSITORY",
+              "value" : "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
+            }, {
+              "name" : "FABRIC8_DEFAULT_ENVIRONMENTS",
+              "value" : "${FABRIC8_DEFAULT_ENVIRONMENTS}"
+            }, {
+              "name" : "KUBERNETES_CLIENT_KEY_FILE",
+              "value" : "/etc/secret-volume/admin-key"
+            }, {
+              "name" : "JENKINS_GOGS_PASSWORD",
+              "value" : "${JENKINS_GOGS_PASSWORD}"
+            }, {
+              "name" : "CGO_ENABLED",
+              "value" : "0"
+            }, {
+              "name" : "KUBERNETES_CLIENT_CERTIFICATE_FILE",
+              "value" : "/etc/secret-volume/admin-cert"
+            }, {
+              "name" : "JENKINS_GOGS_USER",
+              "value" : "${JENKINS_GOGS_USER}"
+            }, {
+              "name" : "JENKINS_GOGS_EMAIL",
+              "value" : "${JENKINS_GOGS_EMAIL}"
+            }, {
+              "name" : "DOMAIN",
+              "value" : "${DOMAIN}"
+            }, {
+              "name" : "SEED_GIT_URL",
+              "value" : "${SEED_GIT_URL}"
+            }, {
+              "name" : "JENKINS_SLAVE_IMAGE",
+              "value" : "${JENKINS_SLAVE_IMAGE}"
+            }, {
+              "name" : "FABRIC8_CONSOLE",
+              "value" : "http://fabric8.${DOMAIN}"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            }, {
+              "name" : "KUBERNETES_POD",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.name"
+                }
+              }
+            } ],
+            "image" : "fabric8/jenkernetes",
+            "imagePullPolicy" : "IfNotPresent",
+            "name" : "jenkins",
+            "ports" : [ {
+              "containerPort" : 50000,
+              "name" : "slave"
+            }, {
+              "containerPort" : 8080,
+              "name" : "http"
+            } ],
+            "securityContext" : {
+              "privileged" : true
+            },
+            "volumeMounts" : [ {
+              "mountPath" : "/var/jenkins_home",
+              "name" : "jenkins-workspace",
+              "readOnly" : false
+            }, {
+              "mountPath" : "/etc/secret-volume",
+              "name" : "openshift-cert-secrets",
+              "readOnly" : false
+            }, {
+              "mountPath" : "/var/run/docker.sock",
+              "name" : "docker-socket",
+              "readOnly" : false
+            }, {
+              "mountPath" : "/home/jenkins/ssh-keys",
+              "name" : "jenkis-master-key",
+              "readOnly" : false
+            } ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "serviceAccountName" : "fabric8",
           "volumes" : [ {
             "hostPath" : {
               "path" : "/home/jenkins/ssh-keys"
@@ -1832,9 +3266,332 @@
                 }
               }
             } ],
-            "image" : "fabric8/kibana-config:2.2.11",
+            "image" : "fabric8/kibana-config:2.2.14",
             "name" : "kibana-config",
             "ports" : [ ],
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "kibana",
+        "provider" : "fabric8"
+      },
+      "name" : "kibana"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "kibana",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "kibana",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "ELASTICSEARCH_SERVICE_NAME",
+              "value" : "ELASTICSEARCH"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/kibana4:4.1.0",
+            "livenessProbe" : {
+              "tcpSocket" : {
+                "port" : 5601
+              }
+            },
+            "name" : "kibana",
+            "ports" : [ {
+              "containerPort" : 5601,
+              "name" : "http"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "ELASTICSEARCH_SERVICE_NAME",
+              "value" : "ELASTICSEARCH"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "fabric8/kibana-config:2.2.14",
+            "name" : "kibana-config",
+            "ports" : [ ],
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "kibana",
+        "provider" : "fabric8"
+      },
+      "name" : "kibana"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "kibana",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "kibana",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "ELASTICSEARCH_SERVICE_NAME",
+              "value" : "ELASTICSEARCH"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/kibana4:4.1.0",
+            "livenessProbe" : {
+              "tcpSocket" : {
+                "port" : 5601
+              }
+            },
+            "name" : "kibana",
+            "ports" : [ {
+              "containerPort" : 5601,
+              "name" : "http"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "ELASTICSEARCH_SERVICE_NAME",
+              "value" : "ELASTICSEARCH"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "fabric8/kibana-config:2.2.14",
+            "name" : "kibana-config",
+            "ports" : [ ],
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "kibana",
+        "provider" : "fabric8"
+      },
+      "name" : "kibana"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "kibana",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "kibana",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "ELASTICSEARCH_SERVICE_NAME",
+              "value" : "ELASTICSEARCH"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/kibana4:4.1.0",
+            "livenessProbe" : {
+              "tcpSocket" : {
+                "port" : 5601
+              }
+            },
+            "name" : "kibana",
+            "ports" : [ {
+              "containerPort" : 5601,
+              "name" : "http"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "ELASTICSEARCH_SERVICE_NAME",
+              "value" : "ELASTICSEARCH"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "fabric8/kibana-config:2.2.14",
+            "name" : "kibana-config",
+            "ports" : [ ],
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "name" : "letschat"
+      },
+      "name" : "letschat"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "name" : "letschat"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "name" : "letschat"
+          },
+          "name" : "letschat"
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ ],
+            "image" : "mongo",
+            "name" : "letschat-mongodb",
+            "ports" : [ {
+              "containerPort" : 27017,
+              "protocol" : "TCP"
+            } ],
+            "volumeMounts" : [ ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "LETSCHAT_CREATE_HUBOT_USER",
+              "value" : "true"
+            }, {
+              "name" : "LETSCHAT_HUBOT_TOKEN",
+              "value" : "${LETSCHAT_HUBOT_TOKEN}"
+            }, {
+              "name" : "LETSCHAT_HUBOT_PASSWORD",
+              "value" : "${LETSCHAT_HUBOT_PASSWORD}"
+            }, {
+              "name" : "LETSCHAT_HUBOT_USERNAME",
+              "value" : "fabric8"
+            }, {
+              "name" : "LETSCHAT_HUBOT_EMAIL",
+              "value" : "fabric8-admin@googlegroups.com"
+            }, {
+              "name" : "LETSCHAT_HUBOT_FIRST_NAME",
+              "value" : "fabric8"
+            }, {
+              "name" : "LETSCHAT_HUBOT_LAST_NAME",
+              "value" : "rocks"
+            }, {
+              "name" : "LETSCHAT_HUBOT_DISPLAY_NAME",
+              "value" : "fabric8"
+            }, {
+              "name" : "LETSCHAT_DEFAULT_ROOMS",
+              "value" : "${LETSCHAT_DEFAULT_ROOMS}"
+            }, {
+              "name" : "LCB_NOROBOTS",
+              "value" : "false"
+            }, {
+              "name" : "LCB_FILES_ENABLE",
+              "value" : "true"
+            }, {
+              "name" : "LCB_DATABASE_URI",
+              "value" : "mongodb://127.0.0.1:27017/letschat"
+            } ],
+            "image" : "fabric8/lets-chat",
+            "name" : "letschat",
+            "ports" : [ {
+              "containerPort" : 5000,
+              "protocol" : "TCP"
+            } ],
             "volumeMounts" : [ ]
           } ],
           "imagePullSecrets" : [ ],
@@ -2000,6 +3757,68 @@
     "metadata" : {
       "annotations" : { },
       "labels" : {
+        "component" : "nexus",
+        "provider" : "fabric8"
+      },
+      "name" : "nexus"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "nexus",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "nexus",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/nexus",
+            "imagePullPolicy" : "IfNotPresent",
+            "name" : "nexus",
+            "ports" : [ {
+              "containerPort" : 8081,
+              "name" : "http"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ {
+              "mountPath" : "/sonatype-work/storage",
+              "name" : "nexus-storage",
+              "readOnly" : false
+            } ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ {
+            "emptyDir" : {
+              "medium" : ""
+            },
+            "name" : "nexus-storage"
+          } ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
         "component" : "orion",
         "provider" : "fabric8"
       },
@@ -2049,6 +3868,118 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "component" : "orion",
+        "provider" : "fabric8"
+      },
+      "name" : "orion"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "component" : "orion",
+        "provider" : "fabric8"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "component" : "orion",
+            "provider" : "fabric8"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "SKIP_TLS_VERIFY",
+              "value" : "true"
+            }, {
+              "name" : "KUBERNETES_TRUST_CERT",
+              "value" : "true"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/eclipse-orion",
+            "imagePullPolicy" : "IfNotPresent",
+            "name" : "orion",
+            "ports" : [ {
+              "containerPort" : 8080,
+              "name" : "http"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "labels" : {
+        "name" : "sonarqube"
+      },
+      "name" : "sonarqube"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "name" : "sonarqube"
+      },
+      "template" : {
+        "metadata" : {
+          "labels" : {
+            "name" : "sonarqube"
+          },
+          "name" : "sonarqube"
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "DB_PORT_3306_TCP_ADDR",
+              "value" : "localhost"
+            } ],
+            "image" : "tpires/sonar-server",
+            "name" : "sonarqube-server-container",
+            "ports" : [ {
+              "containerPort" : 9000,
+              "protocol" : "TCP"
+            } ],
+            "volumeMounts" : [ ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ ],
+            "image" : "tpires/sonar-mysql",
+            "name" : "sonarqube-database-container",
+            "ports" : [ {
+              "containerPort" : 3306,
+              "protocol" : "TCP"
+            } ],
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
           "volumes" : [ ]
         }
       }
@@ -2221,6 +4152,121 @@
         }
       }
     }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "labels" : {
+        "name" : "taiga"
+      },
+      "name" : "taiga"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "name" : "taiga"
+      },
+      "template" : {
+        "metadata" : {
+          "labels" : {
+            "name" : "taiga"
+          },
+          "name" : "taiga"
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "POSTGRES_PASSWORD",
+              "value" : "password"
+            }, {
+              "name" : "POSTGRES_USER",
+              "value" : "taiga"
+            } ],
+            "image" : "postgres",
+            "name" : "taiga-postgres",
+            "ports" : [ ],
+            "volumeMounts" : [ {
+              "mountPath" : "/var/lib/postgresql/data/",
+              "name" : "taiga-data"
+            } ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "SECRET_KEY",
+              "value" : "xyz"
+            }, {
+              "name" : "POSTGRES_PORT_5432_TCP_ADDR",
+              "value" : "127.0.0.1"
+            }, {
+              "name" : "POSTGRES_ENV_POSTGRES_USER",
+              "value" : "taiga"
+            }, {
+              "name" : "POSTGRES_ENV_POSTGRES_PASSWORD",
+              "value" : "password"
+            } ],
+            "image" : "rawlingsj/taiga-back:test",
+            "name" : "taiga-backend",
+            "ports" : [ {
+              "containerPort" : 8000,
+              "protocol" : "TCP"
+            } ],
+            "volumeMounts" : [ {
+              "mountPath" : "/var/lib/postgresql/data",
+              "name" : "taiga-data"
+            }, {
+              "mountPath" : "/usr/local/taiga/static",
+              "name" : "taiga-static"
+            }, {
+              "mountPath" : "/usr/local/taiga/media",
+              "name" : "taiga-media"
+            } ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "TAIGABACK_PORT_8000_TCP_ADDR",
+              "value" : "127.0.0.1"
+            } ],
+            "image" : "rawlingsj/taiga-front-dist:test",
+            "name" : "taiga-nginx",
+            "ports" : [ {
+              "containerPort" : 80,
+              "protocol" : "TCP"
+            } ],
+            "volumeMounts" : [ {
+              "mountPath" : "/var/lib/postgresql/data",
+              "name" : "taiga-data"
+            }, {
+              "mountPath" : "/usr/local/taiga/static",
+              "name" : "taiga-static"
+            }, {
+              "mountPath" : "/usr/local/taiga/media",
+              "name" : "taiga-media"
+            } ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "volumes" : [ {
+            "name" : "taiga-media",
+            "source" : {
+              "emptyDir" : { }
+            }
+          }, {
+            "name" : "taiga-static",
+            "source" : {
+              "emptyDir" : { }
+            }
+          }, {
+            "name" : "taiga-data",
+            "source" : {
+              "emptyDir" : { }
+            }
+          } ]
+        }
+      }
+    }
   } ],
   "parameters" : [ {
     "description" : "The email address of the Jenkins user on Gogs",
@@ -2251,6 +4297,10 @@
     "name" : "JENKINS_SLAVE_IMAGE",
     "value" : "fabric8/jenkins-slave"
   }, {
+    "description" : "The list of default environment names to actual kubernetes namespaces",
+    "name" : "FABRIC8_DEFAULT_ENVIRONMENTS",
+    "value" : "Staging=${buildName}-staging,Production=${buildName}-prod"
+  }, {
     "description" : "The git clone URL for the jenkins workflow repository which can be reused across projects",
     "name" : "JENKINS_WORKFLOW_GIT_REPOSITORY",
     "value" : "https://github.com/fabric8io/jenkins-workflow-library.git"
@@ -2271,12 +4321,18 @@
     "name" : "LETSCHAT_HUBOT_PASSWORD",
     "value" : "RedHat$1"
   }, {
-    "description" : "Coffeescripts for hubot",
-    "name" : "LETSCHAT_HUBOT_SCRIPTS",
-    "value" : "https://github.com/fabric8io/fabric8-hubot-scripts.git"
+    "description" : "API key for a particular user",
+    "name" : "HUBOT_GRAFANA_API_KEY"
   }, {
     "description" : "The username for the Fabric8 Hubot bot",
     "name" : "LETSCHAT_HUBOT_USERNAME",
     "value" : "fabric8"
+  }, {
+    "description" : "Coffeescripts for hubot",
+    "name" : "LETSCHAT_HUBOT_SCRIPTS",
+    "value" : "https://github.com/fabric8io/fabric8-hubot-scripts.git"
+  }, {
+    "description" : "Host for your Grafana 2.0 install, e.g. 'http://play.grafana.org'",
+    "name" : "HUBOT_GRAFANA_HOST"
   } ]
 }

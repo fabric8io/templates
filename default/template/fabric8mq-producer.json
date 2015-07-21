@@ -60,7 +60,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8mq-producer:2.2.11",
+            "image" : "docker.io/fabric8/fabric8mq-producer:2.2.14",
             "name" : "fabric8mq-producer",
             "ports" : [ {
               "containerPort" : 8778,
