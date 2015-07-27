@@ -72,28 +72,19 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/chaos-monkey:2.2.14",
+            "image" : "docker.io/fabric8/chaos-monkey:2.2.17",
             "name" : "chaos-monkey",
             "ports" : [ {
               "containerPort" : 8778,
               "name" : "jolokia"
             } ],
             "securityContext" : { },
-            "volumeMounts" : [ {
-              "mountPath" : "/etc/secret-volume",
-              "name" : "openshift-cert-secrets",
-              "readOnly" : false
-            } ]
+            "volumeMounts" : [ ]
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
           "serviceAccountName" : "fabric8",
-          "volumes" : [ {
-            "name" : "openshift-cert-secrets",
-            "secret" : {
-              "secretName" : "openshift-cert-secrets"
-            }
-          } ]
+          "volumes" : [ ]
         }
       }
     }

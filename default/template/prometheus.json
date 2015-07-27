@@ -48,7 +48,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/prometheus-kubernetes:0.15.0rc1",
+            "image" : "jimmidyson/prometheus-kubernetes:latest",
             "livenessProbe" : {
               "tcpSocket" : {
                 "port" : 9090
@@ -61,35 +61,15 @@
             } ],
             "securityContext" : { },
             "volumeMounts" : [ {
-              "mountPath" : "/var/prometheus",
+              "mountPath" : "/prometheus",
               "name" : "prometheus-data",
               "readOnly" : false
-            }, {
-              "mountPath" : "/etc/prometheus/targets.d",
-              "name" : "prometheus-targets",
-              "readOnly" : false
-            } ]
-          }, {
-            "args" : [ "-master=https://kubernetes.default.svc.cluster.local", "-nodes-file=/etc/prometheus/targets.d/nodes.yml", "-insecure=true" ],
-            "command" : [ ],
-            "env" : [ ],
-            "image" : "docker.io/fabric8/prometheus-k8s-watcher:2.2.14",
-            "name" : "prometheus-k8s-watcher",
-            "ports" : [ ],
-            "volumeMounts" : [ {
-              "mountPath" : "/etc/prometheus/targets.d",
-              "name" : "prometheus-targets"
             } ]
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
           "serviceAccountName" : "metrics",
           "volumes" : [ {
-            "emptyDir" : {
-              "medium" : ""
-            },
-            "name" : "prometheus-targets"
-          }, {
             "emptyDir" : {
               "medium" : ""
             },

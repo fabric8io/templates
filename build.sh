@@ -4,7 +4,7 @@
 DEST="default/template"
 mkdir -p $DEST
 
-FABRIC8_VERSION=${FABRIC8_VERSION:-2.2.14}
+FABRIC8_VERSION=${FABRIC8_VERSION:-2.2.17}
 
 echo "Installing templates from fabric8 version #{FABRIC8_VERSION}"
 for app in base management logging metrics chat cdelivery-core cdelivery apiman messaging ipaas kitchen-sink quickstarts; do
@@ -22,4 +22,3 @@ done
 
 echo "Installed templates"
 ls -l $DEST
-
