@@ -44,9 +44,6 @@
               "name" : "SKIP_TLS_VERIFY",
               "value" : "true"
             }, {
-              "name" : "KUBERNETES_CLIENT_KEY_FILE",
-              "value" : "/etc/secret-volume/admin-key"
-            }, {
               "name" : "CHAOS_MONKEY_ROOM",
               "value" : "${CHAOS_MONKEY_ROOM}"
             }, {
@@ -55,9 +52,6 @@
             }, {
               "name" : "CHAOS_MONKEY_EXCLUDES",
               "value" : "${CHAOS_MONKEY_EXCLUDES}"
-            }, {
-              "name" : "KUBERNETES_CLIENT_CERTIFICATE_FILE",
-              "value" : "/etc/secret-volume/admin-cert"
             }, {
               "name" : "KUBERNETES_TRUST_CERT",
               "value" : "true"
@@ -72,7 +66,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/chaos-monkey:2.2.17",
+            "image" : "docker.io/fabric8/chaos-monkey:2.2.18",
             "name" : "chaos-monkey",
             "ports" : [ {
               "containerPort" : 8778,
