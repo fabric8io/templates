@@ -84,7 +84,8 @@
       "selector" : {
         "component" : "grafana2",
         "provider" : "fabric8"
-      }
+      },
+      "type" : "LoadBalancer"
     }
   } ],
   "parameters" : [ ]

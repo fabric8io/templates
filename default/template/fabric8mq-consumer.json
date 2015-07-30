@@ -60,7 +60,7 @@
                 }
               }
             } ],
-            "image" : "docker.io/fabric8/fabric8mq-consumer:2.2.18",
+            "image" : "docker.io/fabric8/fabric8mq-consumer:2.2.19",
             "name" : "fabric8mq-consumer",
             "ports" : [ {
               "containerPort" : 8778,

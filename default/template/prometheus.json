@@ -99,7 +99,8 @@
       "selector" : {
         "component" : "prometheus",
         "provider" : "fabric8"
-      }
+      },
+      "type" : "LoadBalancer"
     }
   } ],
   "parameters" : [ ]
