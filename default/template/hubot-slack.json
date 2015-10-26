@@ -1,7 +1,101 @@
-<html>
-<head><title>404 Not Found</title></head>
-<body bgcolor="white">
-<center><h1>404 Not Found</h1></center>
-<hr><center>nginx</center>
-</body>
-</html>
+{
+  "apiVersion" : "v1",
+  "kind" : "Template",
+  "labels" : { },
+  "metadata" : {
+    "annotations" : { },
+    "labels" : {
+      "name" : "hubot-slack"
+    },
+    "name" : "hubot-slack"
+  },
+  "objects" : [ {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : { },
+      "name" : "hubot"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "targetPort" : 8080
+      } ],
+      "selector" : {
+        "name" : "hubot-slack"
+      },
+      "type" : "LoadBalancer"
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "name" : "hubot-slack"
+      },
+      "name" : "hubot-slack"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "name" : "hubot-slack"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "name" : "hubot-slack"
+          },
+          "name" : "hubot-slack"
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "HUBOT_SLACK_TOKEN",
+              "value" : "${HUBOT_SLACK_TOKEN}"
+            }, {
+              "name" : "HUBOT_GRAFANA_HOST",
+              "value" : "${HUBOT_SLACK_GRAFANA_HOST}"
+            }, {
+              "name" : "HUBOT_GRAFANA_API_KEY",
+              "value" : "${HUBOT_SLACK_GRAFANA_API_KEY}"
+            }, {
+              "name" : "HUBOT_JENKINS_URL",
+              "value" : "${HUBOT_JENKINS_URL}"
+            } ],
+            "image" : "fabric8/hubot-slack:2.2.61",
+            "name" : "hubot-slack",
+            "ports" : [ {
+              "containerPort" : 8080,
+              "protocol" : "TCP"
+            } ],
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  } ],
+  "parameters" : [ {
+    "description" : "The token for Hubot to login to Slack",
+    "name" : "HUBOT_SLACK_TOKEN"
+  }, {
+    "description" : "Host for your Grafana 2.0 install, e.g. 'http://play.grafana.org'",
+    "name" : "HUBOT_SLACK_GRAFANA_HOST",
+    "value" : "http://grafana2.default.svc.cluster.local"
+  }, {
+    "description" : "API key for a particular user",
+    "name" : "HUBOT_SLACK_GRAFANA_API_KEY"
+  }, {
+    "description" : "The URL for the Jenkins CI server",
+    "name" : "HUBOT_JENKINS_URL",
+    "value" : "http://jenkins.default.svc.cluster.local"
+  } ]
+}

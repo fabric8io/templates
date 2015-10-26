@@ -1,7 +1,172 @@
-<html>
-<head><title>404 Not Found</title></head>
-<body bgcolor="white">
-<center><h1>404 Not Found</h1></center>
-<hr><center>nginx</center>
-</body>
-</html>
+{
+  "apiVersion" : "v1",
+  "kind" : "Template",
+  "labels" : { },
+  "metadata" : {
+    "annotations" : { },
+    "labels" : {
+      "provider" : "fabric8",
+      "component" : "taiga"
+    },
+    "name" : "taiga"
+  },
+  "objects" : [ {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "provider" : "fabric8",
+        "component" : "taiga"
+      },
+      "name" : "taiga"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "targetPort" : 80
+      } ],
+      "selector" : {
+        "provider" : "fabric8",
+        "component" : "taiga"
+      },
+      "type" : "LoadBalancer"
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "provider" : "fabric8",
+        "component" : "taiga"
+      },
+      "name" : "taigaback"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 8000,
+        "targetPort" : 8000
+      } ],
+      "selector" : {
+        "provider" : "fabric8",
+        "component" : "taiga"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "provider" : "fabric8",
+        "component" : "taiga"
+      },
+      "name" : "taiga"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "provider" : "fabric8",
+        "component" : "taiga"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "provider" : "fabric8",
+            "component" : "taiga"
+          },
+          "name" : "taiga"
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "POSTGRES_PASSWORD",
+              "value" : "password"
+            }, {
+              "name" : "POSTGRES_USER",
+              "value" : "taiga"
+            } ],
+            "image" : "postgres",
+            "name" : "taiga-postgres",
+            "ports" : [ ],
+            "volumeMounts" : [ {
+              "mountPath" : "/var/lib/postgresql/data/",
+              "name" : "taiga-data"
+            } ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "SECRET_KEY",
+              "value" : "xyz"
+            }, {
+              "name" : "POSTGRES_PORT_5432_TCP_ADDR",
+              "value" : "127.0.0.1"
+            }, {
+              "name" : "POSTGRES_ENV_POSTGRES_USER",
+              "value" : "taiga"
+            }, {
+              "name" : "POSTGRES_ENV_POSTGRES_PASSWORD",
+              "value" : "password"
+            } ],
+            "image" : "fabric8/taiga-back:2.2.61",
+            "name" : "taiga-backend",
+            "ports" : [ {
+              "containerPort" : 8000,
+              "protocol" : "TCP"
+            } ],
+            "volumeMounts" : [ {
+              "mountPath" : "/var/lib/postgresql/data",
+              "name" : "taiga-data"
+            }, {
+              "mountPath" : "/usr/local/taiga/static",
+              "name" : "taiga-static"
+            }, {
+              "mountPath" : "/usr/local/taiga/media",
+              "name" : "taiga-media"
+            } ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ ],
+            "image" : "fabric8/taiga-front:2.2.61",
+            "name" : "taiga-frontend",
+            "ports" : [ {
+              "containerPort" : 80,
+              "protocol" : "TCP"
+            } ],
+            "volumeMounts" : [ {
+              "mountPath" : "/var/lib/postgresql/data",
+              "name" : "taiga-data"
+            }, {
+              "mountPath" : "/usr/local/taiga/static",
+              "name" : "taiga-static"
+            }, {
+              "mountPath" : "/usr/local/taiga/media",
+              "name" : "taiga-media"
+            } ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ {
+            "emptyDir" : { },
+            "name" : "taiga-data"
+          }, {
+            "emptyDir" : { },
+            "name" : "taiga-static"
+          }, {
+            "emptyDir" : { },
+            "name" : "taiga-media"
+          } ]
+        }
+      }
+    }
+  } ],
+  "parameters" : [ ]
+}

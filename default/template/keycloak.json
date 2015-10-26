@@ -1,7 +1,107 @@
-<html>
-<head><title>404 Not Found</title></head>
-<body bgcolor="white">
-<center><h1>404 Not Found</h1></center>
-<hr><center>nginx</center>
-</body>
-</html>
+{
+  "apiVersion" : "v1",
+  "kind" : "Template",
+  "labels" : { },
+  "metadata" : {
+    "annotations" : {
+      "fabric8.keycloak/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/keycloak/src/main/fabric8/icon.svg",
+      "description" : "Built on top of the OAuth 2.0, Open ID Connect, JSON Web Token (JWT) and SAML 2.0 specifications.\n",
+      "fabric8.keycloak/summary" : "Keycloack (security) - Integrated SSO and IDM for browser apps and RESTful services"
+    },
+    "labels" : { },
+    "name" : "keycloak"
+  },
+  "objects" : [ {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "project" : "keycloak",
+        "component" : "keycloak",
+        "provider" : "fabric8",
+        "version" : "2.2.61"
+      },
+      "name" : "keycloak"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "protocol" : "TCP",
+        "targetPort" : "http"
+      } ],
+      "selector" : {
+        "project" : "keycloak",
+        "component" : "keycloak",
+        "provider" : "fabric8"
+      },
+      "type" : "LoadBalancer"
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : {
+        "fabric8.io/git-branch" : "release-v2.2.61",
+        "fabric8.io/git-commit" : "c3165f12e540e71c02123159a733c326a65e477e",
+        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/c3165f12e540e71c02123159a733c326a65e477e",
+        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/6",
+        "fabric8.io/build-id" : "6"
+      },
+      "labels" : {
+        "project" : "keycloak",
+        "component" : "keycloak",
+        "provider" : "fabric8",
+        "version" : "2.2.61"
+      },
+      "name" : "keycloak"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "project" : "keycloak",
+        "component" : "keycloak",
+        "provider" : "fabric8",
+        "version" : "2.2.61"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "project" : "keycloak",
+            "component" : "keycloak",
+            "provider" : "fabric8",
+            "version" : "2.2.61"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "jboss/keycloak:1.3.1.Final",
+            "name" : "keycloak",
+            "ports" : [ {
+              "containerPort" : 8080,
+              "name" : "http"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  } ],
+  "parameters" : [ ]
+}

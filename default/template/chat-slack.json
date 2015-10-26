@@ -1,7 +1,183 @@
-<html>
-<head><title>404 Not Found</title></head>
-<body bgcolor="white">
-<center><h1>404 Not Found</h1></center>
-<hr><center>nginx</center>
-</body>
-</html>
+{
+  "apiVersion" : "v1",
+  "kind" : "Template",
+  "labels" : { },
+  "metadata" : {
+    "annotations" : {
+      "fabric8.hubot-notifier/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/hubot-notifier/src/main/fabric8/icon.png",
+      "description" : "Provides [Chat](http://fabric8.io/guide/chat.html) using [Hubot](https://hubot.github.com/) as the bot framework and [Slack](https://slack.com/) as the chat service",
+      "fabric8.hubot-notifier/summary" : "Watches the OpenShift environment and notifies Hubot of events such as builds completing or failing",
+      "fabric8.chat-slack/summary" : "Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/",
+      "fabric8.chat-slack/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/packages/chat-slack/src/main/fabric8/icon.png"
+    },
+    "labels" : { },
+    "name" : "chat-slack"
+  },
+  "objects" : [ {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : { },
+      "name" : "hubot"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "targetPort" : 8080
+      } ],
+      "selector" : {
+        "name" : "hubot-slack"
+      },
+      "type" : "LoadBalancer"
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : {
+        "fabric8.io/git-branch" : "release-v2.2.61",
+        "fabric8.io/git-commit" : "c3165f12e540e71c02123159a733c326a65e477e",
+        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/c3165f12e540e71c02123159a733c326a65e477e",
+        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/6",
+        "fabric8.io/build-id" : "6"
+      },
+      "labels" : {
+        "project" : "hubot-notifier",
+        "component" : "hubotNotifier",
+        "provider" : "fabric8",
+        "version" : "2.2.61"
+      },
+      "name" : "hubot-notifier"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "project" : "hubot-notifier",
+        "component" : "hubotNotifier",
+        "provider" : "fabric8",
+        "version" : "2.2.61"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "project" : "hubot-notifier",
+            "component" : "hubotNotifier",
+            "provider" : "fabric8",
+            "version" : "2.2.61"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "HUBOT_KUBERNETES_ROOM",
+              "value" : "#fabric8_${namespace}"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "fabric8/hubot-notifier:2.2.61",
+            "name" : "hubot-notifier",
+            "ports" : [ {
+              "containerPort" : 8778,
+              "name" : "jolokia"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "serviceAccountName" : "fabric8",
+          "volumes" : [ ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : {
+        "fabric8.io/git-branch" : "release-v2.2.61",
+        "fabric8.io/git-commit" : "c3165f12e540e71c02123159a733c326a65e477e",
+        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/c3165f12e540e71c02123159a733c326a65e477e",
+        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/6",
+        "fabric8.io/build-id" : "6"
+      },
+      "labels" : {
+        "name" : "hubot-slack"
+      },
+      "name" : "hubot-slack"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "name" : "hubot-slack"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "name" : "hubot-slack"
+          },
+          "name" : "hubot-slack"
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "HUBOT_SLACK_TOKEN",
+              "value" : "${HUBOT_SLACK_TOKEN}"
+            }, {
+              "name" : "HUBOT_GRAFANA_HOST",
+              "value" : "${HUBOT_SLACK_GRAFANA_HOST}"
+            }, {
+              "name" : "HUBOT_GRAFANA_API_KEY",
+              "value" : "${HUBOT_SLACK_GRAFANA_API_KEY}"
+            }, {
+              "name" : "HUBOT_JENKINS_URL",
+              "value" : "${HUBOT_JENKINS_URL}"
+            } ],
+            "image" : "fabric8/hubot-slack:2.2.61",
+            "name" : "hubot-slack",
+            "ports" : [ {
+              "containerPort" : 8080,
+              "protocol" : "TCP"
+            } ],
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  } ],
+  "parameters" : [ {
+    "description" : "The DNS domain added to the serviceName.namespace.svc. to make the DNS name",
+    "name" : "KUBERNETES_DNS_DOMAIN",
+    "value" : "cluster.local"
+  }, {
+    "description" : "The token for Hubot to login to Slack",
+    "name" : "HUBOT_SLACK_TOKEN"
+  }, {
+    "description" : "Host for your Grafana 2.0 install, e.g. 'http://play.grafana.org'",
+    "name" : "HUBOT_SLACK_GRAFANA_HOST",
+    "value" : "http://grafana2.default.svc.cluster.local"
+  }, {
+    "description" : "API key for a particular user",
+    "name" : "HUBOT_SLACK_GRAFANA_API_KEY"
+  }, {
+    "description" : "The URL for the Jenkins CI server",
+    "name" : "HUBOT_JENKINS_URL",
+    "value" : "http://jenkins.default.svc.cluster.local"
+  } ]
+}

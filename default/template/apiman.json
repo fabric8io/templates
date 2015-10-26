@@ -1,7 +1,376 @@
-<html>
-<head><title>404 Not Found</title></head>
-<body bgcolor="white">
-<center><h1>404 Not Found</h1></center>
-<hr><center>nginx</center>
-</body>
-</html>
+{
+  "apiVersion" : "v1",
+  "kind" : "Template",
+  "labels" : { },
+  "metadata" : {
+    "annotations" : {
+      "description" : "The Apiman Package provides the core [Apiman platform](http://fabric8.io/guide/apiManagement.html) using [Apiman Management Application ](http://www.apiman.io/latest/user-guide.html#_api_manager), [Apiman Gateway](http://www.apiman.io/latest/user-guide.html#_api_gateway) and [ElasticSearch](https://www.elastic.co/). \n\nKnown Issue: If all 3 applications are deployed and Apiman is not working correctly you may be in the situation where Apiman deployed *before* Elasticsearch. The workaround for this issue is to kill the apiman pod. The controller will fire up a new pod and this time it should find the elastic service. \n",
+      "fabric8.elasticsearch/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/elasticsearch/src/main/fabric8/icon.png",
+      "fabric8.elasticsearch/summary" : "[elasticsearch](http://elasticsearch.com/) provides distributed RESTful search and analytics",
+      "fabric8.apiman/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8-ipaas/master/apiman/src/main/fabric8/icon.png",
+      "fabric8.apiman/summary" : "Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/",
+      "fabric8.apiman-gateway/summary" : "Apiman Gateway deployed on Jetty",
+      "fabric8.apiman-gateway/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8-ipaas/master/apiman-gateway/src/main/fabric8/icon.png"
+    },
+    "labels" : { },
+    "name" : "apiman"
+  },
+  "objects" : [ {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : {
+        "apiman.io/servicetype" : "REST",
+        "apiman.io/descriptionpath" : "apiman/swagger.json",
+        "apiman.io/descriptiontype" : "SwaggerJSON",
+        "apiman.io/servicepath" : "apiman"
+      },
+      "labels" : {
+        "project" : "apiman",
+        "component" : "ApimanManagerAPI",
+        "provider" : "fabric8",
+        "version" : "2.2.59",
+        "group" : "defaultGatewayGroup"
+      },
+      "name" : "apiman"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 7070,
+        "protocol" : "TCP",
+        "targetPort" : 7070
+      } ],
+      "selector" : {
+        "project" : "apiman",
+        "component" : "ApimanManagerAPI",
+        "provider" : "fabric8",
+        "group" : "defaultGatewayGroup"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : {
+        "apiman.io/servicetype" : "REST",
+        "apiman.io/descriptionpath" : "api/swagger.json",
+        "apiman.io/descriptiontype" : "SwaggerJSON",
+        "apiman.io/servicepath" : "api"
+      },
+      "labels" : {
+        "project" : "apiman-gateway",
+        "component" : "ApimanGateway",
+        "provider" : "fabric8",
+        "version" : "2.2.59",
+        "group" : "defaultGatewayGroup"
+      },
+      "name" : "apiman-gateway"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 7777,
+        "protocol" : "TCP",
+        "targetPort" : 7777
+      } ],
+      "selector" : {
+        "project" : "apiman-gateway",
+        "component" : "ApimanGateway",
+        "provider" : "fabric8",
+        "group" : "defaultGatewayGroup"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "provider" : "fabric8",
+        "component" : "elasticsearch"
+      },
+      "name" : "elasticsearch"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 9200,
+        "protocol" : "TCP",
+        "targetPort" : 9200
+      } ],
+      "selector" : {
+        "provider" : "fabric8",
+        "component" : "elasticsearch"
+      },
+      "type" : "LoadBalancer"
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : { },
+      "name" : "elasticsearch-cluster"
+    },
+    "spec" : {
+      "clusterIP" : "None",
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "name" : "",
+        "port" : 9300,
+        "protocol" : "TCP",
+        "targetPort" : 9300
+      } ],
+      "selector" : {
+        "provider" : "fabric8",
+        "component" : "elasticsearch"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : {
+        "fabric8.io/git-branch" : "release-v2.2.59",
+        "fabric8.io/git-commit" : "0343d2431da4661190ef62d21af22c73aa265258",
+        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/0343d2431da4661190ef62d21af22c73aa265258",
+        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/35",
+        "fabric8.io/build-id" : "35"
+      },
+      "labels" : {
+        "project" : "apiman",
+        "component" : "ApimanManagerAPI",
+        "provider" : "fabric8",
+        "version" : "2.2.59",
+        "group" : "defaultGatewayGroup"
+      },
+      "name" : "apiman"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "project" : "apiman",
+        "component" : "ApimanManagerAPI",
+        "provider" : "fabric8",
+        "version" : "2.2.59",
+        "group" : "defaultGatewayGroup"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "project" : "apiman",
+            "component" : "ApimanManagerAPI",
+            "provider" : "fabric8",
+            "version" : "2.2.59",
+            "group" : "defaultGatewayGroup"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "MAIN",
+              "value" : "io.fabric8.apiman.ApimanStarter"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "fabric8/apiman:2.2.59",
+            "name" : "apiman",
+            "ports" : [ {
+              "containerPort" : 7070,
+              "name" : "http"
+            }, {
+              "containerPort" : 8778,
+              "name" : "jolokia"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "serviceAccountName" : "fabric8",
+          "volumes" : [ ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : {
+        "fabric8.io/git-branch" : "release-v2.2.59",
+        "fabric8.io/git-commit" : "0343d2431da4661190ef62d21af22c73aa265258",
+        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/0343d2431da4661190ef62d21af22c73aa265258",
+        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/35",
+        "fabric8.io/build-id" : "35"
+      },
+      "labels" : {
+        "project" : "apiman-gateway",
+        "component" : "ApimanGateway",
+        "provider" : "fabric8",
+        "version" : "2.2.59",
+        "group" : "defaultGatewayGroup"
+      },
+      "name" : "apiman-gateway"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "project" : "apiman-gateway",
+        "component" : "ApimanGateway",
+        "provider" : "fabric8",
+        "version" : "2.2.59",
+        "group" : "defaultGatewayGroup"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "project" : "apiman-gateway",
+            "component" : "ApimanGateway",
+            "provider" : "fabric8",
+            "version" : "2.2.59",
+            "group" : "defaultGatewayGroup"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "MAIN",
+              "value" : "io.fabric8.apiman.gateway.ApimanGatewayStarter"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "fabric8/apiman-gateway:2.2.59",
+            "name" : "apiman-gateway",
+            "ports" : [ {
+              "containerPort" : 7777,
+              "name" : "http"
+            }, {
+              "containerPort" : 8778,
+              "name" : "jolokia"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : {
+        "fabric8.io/git-branch" : "release-v2.2.59",
+        "fabric8.io/git-commit" : "0343d2431da4661190ef62d21af22c73aa265258",
+        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/0343d2431da4661190ef62d21af22c73aa265258",
+        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/35",
+        "fabric8.io/build-id" : "35"
+      },
+      "labels" : {
+        "provider" : "fabric8",
+        "component" : "elasticsearch"
+      },
+      "name" : "elasticsearch"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "provider" : "fabric8",
+        "component" : "elasticsearch"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "provider" : "fabric8",
+            "component" : "elasticsearch"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "KUBERNETES_TRUST_CERT",
+              "value" : "true"
+            }, {
+              "name" : "SERVICE_DNS",
+              "value" : "elasticsearch-cluster"
+            }, {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "docker.io/fabric8/elasticsearch-k8s:1.5.2",
+            "livenessProbe" : {
+              "initialDelaySeconds" : 60,
+              "tcpSocket" : {
+                "port" : 9300
+              }
+            },
+            "name" : "elasticsearch",
+            "ports" : [ {
+              "containerPort" : 9200,
+              "name" : "http"
+            }, {
+              "containerPort" : 9300,
+              "name" : "transport"
+            } ],
+            "readinessProbe" : {
+              "httpGet" : {
+                "path" : "/_template/logstash",
+                "port" : 9200
+              },
+              "initialDelaySeconds" : 60
+            },
+            "securityContext" : { },
+            "volumeMounts" : [ {
+              "mountPath" : "/usr/share/elasticsearch/data",
+              "name" : "elasticsearch-data",
+              "readOnly" : false
+            } ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ ],
+            "image" : "docker.io/fabric8/elasticsearch-logstash-template:2.2.28",
+            "name" : "logstash-template",
+            "ports" : [ ],
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ {
+            "emptyDir" : {
+              "medium" : ""
+            },
+            "name" : "elasticsearch-data"
+          } ]
+        }
+      }
+    }
+  } ],
+  "parameters" : [ ]
+}

@@ -1,7 +1,130 @@
-<html>
-<head><title>404 Not Found</title></head>
-<body bgcolor="white">
-<center><h1>404 Not Found</h1></center>
-<hr><center>nginx</center>
-</body>
-</html>
+{
+  "apiVersion" : "v1",
+  "kind" : "Template",
+  "labels" : { },
+  "metadata" : {
+    "annotations" : { },
+    "labels" : {
+      "name" : "letschat"
+    },
+    "name" : "letschat"
+  },
+  "objects" : [ {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : { },
+      "name" : "letschat"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 80,
+        "targetPort" : 5000
+      } ],
+      "selector" : {
+        "name" : "letschat"
+      },
+      "type" : "LoadBalancer"
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "name" : "letschat"
+      },
+      "name" : "letschat"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "name" : "letschat"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "name" : "letschat"
+          },
+          "name" : "letschat"
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ ],
+            "image" : "mongo",
+            "name" : "letschat-mongodb",
+            "ports" : [ {
+              "containerPort" : 27017,
+              "protocol" : "TCP"
+            } ],
+            "volumeMounts" : [ ]
+          }, {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "LETSCHAT_CREATE_HUBOT_USER",
+              "value" : "true"
+            }, {
+              "name" : "LETSCHAT_HUBOT_TOKEN",
+              "value" : "${LETSCHAT_HUBOT_TOKEN}"
+            }, {
+              "name" : "LETSCHAT_HUBOT_PASSWORD",
+              "value" : "${LETSCHAT_HUBOT_PASSWORD}"
+            }, {
+              "name" : "LETSCHAT_HUBOT_USERNAME",
+              "value" : "fabric8"
+            }, {
+              "name" : "LETSCHAT_HUBOT_EMAIL",
+              "value" : "fabric8-admin@googlegroups.com"
+            }, {
+              "name" : "LETSCHAT_HUBOT_FIRST_NAME",
+              "value" : "fabric8"
+            }, {
+              "name" : "LETSCHAT_HUBOT_LAST_NAME",
+              "value" : "rocks"
+            }, {
+              "name" : "LETSCHAT_HUBOT_DISPLAY_NAME",
+              "value" : "fabric8"
+            }, {
+              "name" : "LETSCHAT_DEFAULT_ROOMS",
+              "value" : "${LETSCHAT_DEFAULT_ROOMS}"
+            }, {
+              "name" : "LCB_NOROBOTS",
+              "value" : "false"
+            }, {
+              "name" : "LCB_FILES_ENABLE",
+              "value" : "true"
+            }, {
+              "name" : "LCB_DATABASE_URI",
+              "value" : "mongodb://127.0.0.1:27017/letschat"
+            } ],
+            "image" : "fabric8/lets-chat:2.2.61",
+            "name" : "letschat",
+            "ports" : [ {
+              "containerPort" : 5000,
+              "protocol" : "TCP"
+            } ],
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  } ],
+  "parameters" : [ {
+    "description" : "Default rooms to create and for hubot to join",
+    "name" : "LETSCHAT_DEFAULT_ROOMS",
+    "value" : "fabric8_default"
+  }, {
+    "description" : "The password for Hubot to login to Let's Chat",
+    "name" : "LETSCHAT_HUBOT_PASSWORD",
+    "value" : "RedHat$1"
+  } ]
+}

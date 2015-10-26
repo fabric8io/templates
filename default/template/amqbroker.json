@@ -1,7 +1,114 @@
-<html>
-<head><title>404 Not Found</title></head>
-<body bgcolor="white">
-<center><h1>404 Not Found</h1></center>
-<hr><center>nginx</center>
-</body>
-</html>
+{
+  "apiVersion" : "v1",
+  "kind" : "Template",
+  "labels" : { },
+  "metadata" : {
+    "annotations" : {
+      "description" : "runs a [Apache ActiveMQ](http://activemq.apache.org/) broker which is then exposed as a [kubernetes service](http://fabric8.io/v2/services.html).\n",
+      "fabric8.amqbroker/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8/master/fabric8-maven-plugin/src/main/resources/icons/activemq.svg",
+      "fabric8.amqbroker/summary" : "ActiveMQ Broker"
+    },
+    "labels" : { },
+    "name" : "amqbroker"
+  },
+  "objects" : [ {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "project" : "amqbroker",
+        "component" : "amqbroker",
+        "provider" : "fabric8",
+        "version" : "2.2.59",
+        "group" : "amqbroker"
+      },
+      "name" : "amqbroker"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "ports" : [ {
+        "port" : 7163,
+        "protocol" : "TCP",
+        "targetPort" : 7162
+      } ],
+      "selector" : {
+        "project" : "amqbroker",
+        "component" : "amqbroker",
+        "provider" : "fabric8",
+        "group" : "amqbroker"
+      }
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "ReplicationController",
+    "metadata" : {
+      "annotations" : {
+        "fabric8.io/git-branch" : "release-v2.2.59",
+        "fabric8.io/git-commit" : "0343d2431da4661190ef62d21af22c73aa265258",
+        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/0343d2431da4661190ef62d21af22c73aa265258",
+        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/35",
+        "fabric8.io/build-id" : "35"
+      },
+      "labels" : {
+        "project" : "amqbroker",
+        "component" : "amqbroker",
+        "provider" : "fabric8",
+        "version" : "2.2.59",
+        "group" : "amqbroker"
+      },
+      "name" : "amqbroker"
+    },
+    "spec" : {
+      "replicas" : 1,
+      "selector" : {
+        "project" : "amqbroker",
+        "component" : "amqbroker",
+        "provider" : "fabric8",
+        "version" : "2.2.59",
+        "group" : "amqbroker"
+      },
+      "template" : {
+        "metadata" : {
+          "annotations" : { },
+          "labels" : {
+            "project" : "amqbroker",
+            "component" : "amqbroker",
+            "provider" : "fabric8",
+            "version" : "2.2.59",
+            "group" : "amqbroker"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "args" : [ ],
+            "command" : [ ],
+            "env" : [ {
+              "name" : "KUBERNETES_NAMESPACE",
+              "valueFrom" : {
+                "fieldRef" : {
+                  "fieldPath" : "metadata.namespace"
+                }
+              }
+            } ],
+            "image" : "fabric8/amqbroker:2.2.59",
+            "name" : "amqbroker",
+            "ports" : [ {
+              "containerPort" : 6194,
+              "name" : "amq"
+            }, {
+              "containerPort" : 8778,
+              "name" : "jolokia"
+            } ],
+            "securityContext" : { },
+            "volumeMounts" : [ ]
+          } ],
+          "imagePullSecrets" : [ ],
+          "nodeSelector" : { },
+          "volumes" : [ ]
+        }
+      }
+    }
+  } ],
+  "parameters" : [ ]
+}
