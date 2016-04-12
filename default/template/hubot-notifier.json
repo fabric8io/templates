@@ -16,36 +16,34 @@
     "kind" : "ReplicationController",
     "metadata" : {
       "annotations" : {
-        "fabric8.io/git-branch" : "release-v2.2.61",
-        "fabric8.io/git-commit" : "c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/6",
-        "fabric8.io/build-id" : "6"
+        "fabric8.io/git-branch" : "release-v2.2.157",
+        "fabric8.io/git-commit" : "988f82625a978532bc677bd4ddd884c8c6176743",
+        "fabric8.io/build-id" : "3"
       },
       "labels" : {
-        "project" : "hubot-notifier",
-        "component" : "hubotNotifier",
+        "project" : "hubotNotifier",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "name" : "hubot-notifier"
     },
     "spec" : {
       "replicas" : 1,
       "selector" : {
-        "project" : "hubot-notifier",
-        "component" : "hubotNotifier",
+        "project" : "hubotNotifier",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "template" : {
         "metadata" : {
           "annotations" : { },
           "labels" : {
-            "project" : "hubot-notifier",
-            "component" : "hubotNotifier",
+            "project" : "hubotNotifier",
             "provider" : "fabric8",
-            "version" : "2.2.61"
+            "version" : "2.2.157",
+            "group" : "io.fabric8.devops.apps"
           }
         },
         "spec" : {
@@ -56,6 +54,12 @@
               "name" : "HUBOT_KUBERNETES_ROOM",
               "value" : "#fabric8_${namespace}"
             }, {
+              "name" : "HUBOT_USERNAME",
+              "value" : "${HUBOT_USERNAME}"
+            }, {
+              "name" : "HUBOT_PASSWORD",
+              "value" : "${HUBOT_PASSWORD}"
+            }, {
               "name" : "KUBERNETES_NAMESPACE",
               "valueFrom" : {
                 "fieldRef" : {
@@ -63,7 +67,7 @@
                 }
               }
             } ],
-            "image" : "fabric8/hubot-notifier:2.2.61",
+            "image" : "fabric8/hubot-notifier:2.2.157",
             "name" : "hubot-notifier",
             "ports" : [ {
               "containerPort" : 8778,
@@ -84,5 +88,13 @@
     "description" : "The DNS domain added to the serviceName.namespace.svc. to make the DNS name",
     "name" : "KUBERNETES_DNS_DOMAIN",
     "value" : "cluster.local"
+  }, {
+    "description" : "The password for Hubot to login to the chat service",
+    "name" : "HUBOT_PASSWORD",
+    "value" : "RedHat$1"
+  }, {
+    "description" : "The username for Hubot to login to the chat service",
+    "name" : "HUBOT_USERNAME",
+    "value" : "fabric8"
   } ]
 }

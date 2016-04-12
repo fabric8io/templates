@@ -16,22 +16,23 @@
     "kind" : "Service",
     "metadata" : {
       "annotations" : {
-        "apiman.io/servicetype" : "REST",
-        "apiman.io/descriptionpath" : "api/swagger.json",
-        "apiman.io/descriptiontype" : "SwaggerJSON",
-        "apiman.io/servicepath" : "api"
+        "api.service.kubernetes.io/description-language" : "SwaggerJSON",
+        "api.service.kubernetes.io/path" : "api",
+        "api.service.kubernetes.io/protocol" : "REST",
+        "api.service.kubernetes.io/description-path" : "api/swagger.json"
       },
       "labels" : {
         "project" : "apiman-gateway",
         "component" : "ApimanGateway",
         "provider" : "fabric8",
-        "version" : "2.2.59",
-        "group" : "defaultGatewayGroup"
+        "version" : "2.2.108",
+        "group" : "io.fabric8.ipaas.apps"
       },
       "name" : "apiman-gateway"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 7777,
         "protocol" : "TCP",
@@ -41,7 +42,7 @@
         "project" : "apiman-gateway",
         "component" : "ApimanGateway",
         "provider" : "fabric8",
-        "group" : "defaultGatewayGroup"
+        "group" : "io.fabric8.ipaas.apps"
       }
     }
   }, {
@@ -49,18 +50,16 @@
     "kind" : "ReplicationController",
     "metadata" : {
       "annotations" : {
-        "fabric8.io/git-branch" : "release-v2.2.59",
-        "fabric8.io/git-commit" : "0343d2431da4661190ef62d21af22c73aa265258",
-        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/0343d2431da4661190ef62d21af22c73aa265258",
-        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/35",
-        "fabric8.io/build-id" : "35"
+        "fabric8.io/git-branch" : "release-v2.2.108",
+        "fabric8.io/git-commit" : "1f05bb1f49005a5ca248f337201497a2d27a8e8d",
+        "fabric8.io/build-id" : "1"
       },
       "labels" : {
         "project" : "apiman-gateway",
         "component" : "ApimanGateway",
         "provider" : "fabric8",
-        "version" : "2.2.59",
-        "group" : "defaultGatewayGroup"
+        "version" : "2.2.108",
+        "group" : "io.fabric8.ipaas.apps"
       },
       "name" : "apiman-gateway"
     },
@@ -70,8 +69,8 @@
         "project" : "apiman-gateway",
         "component" : "ApimanGateway",
         "provider" : "fabric8",
-        "version" : "2.2.59",
-        "group" : "defaultGatewayGroup"
+        "version" : "2.2.108",
+        "group" : "io.fabric8.ipaas.apps"
       },
       "template" : {
         "metadata" : {
@@ -80,8 +79,8 @@
             "project" : "apiman-gateway",
             "component" : "ApimanGateway",
             "provider" : "fabric8",
-            "version" : "2.2.59",
-            "group" : "defaultGatewayGroup"
+            "version" : "2.2.108",
+            "group" : "io.fabric8.ipaas.apps"
           }
         },
         "spec" : {
@@ -89,8 +88,8 @@
             "args" : [ ],
             "command" : [ ],
             "env" : [ {
-              "name" : "MAIN",
-              "value" : "io.fabric8.apiman.gateway.ApimanGatewayStarter"
+              "name" : "AB_JOLOKIA_AUTH_OPENSHIFT",
+              "value" : "true"
             }, {
               "name" : "KUBERNETES_NAMESPACE",
               "valueFrom" : {
@@ -99,7 +98,7 @@
                 }
               }
             } ],
-            "image" : "fabric8/apiman-gateway:2.2.59",
+            "image" : "fabric8/apiman-gateway:2.2.108",
             "name" : "apiman-gateway",
             "ports" : [ {
               "containerPort" : 7777,
@@ -108,11 +107,21 @@
               "containerPort" : 8778,
               "name" : "jolokia"
             } ],
+            "readinessProbe" : {
+              "httpGet" : {
+                "httpHeaders" : [ ],
+                "path" : "/api/system/status",
+                "port" : 7777
+              },
+              "initialDelaySeconds" : 5,
+              "timeoutSeconds" : 60
+            },
             "securityContext" : { },
             "volumeMounts" : [ ]
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
+          "serviceAccountName" : "fabric8",
           "volumes" : [ ]
         }
       }

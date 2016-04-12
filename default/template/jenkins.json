@@ -31,59 +31,25 @@
     "apiVersion" : "v1",
     "kind" : "Service",
     "metadata" : {
-      "annotations" : {
-        "prometheus.io/scrape" : "true",
-        "prometheus.io/path" : "/prometheus",
-        "prometheus.io/port" : "8080"
-      },
+      "annotations" : { },
       "labels" : {
-        "project" : "jenkins",
-        "component" : "jenkins",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "project" : "jenkins"
       },
       "name" : "jenkins"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
-      "ports" : [ {
-        "name" : "http",
-        "port" : 80,
-        "targetPort" : 8080
-      } ],
-      "selector" : {
-        "project" : "jenkins",
-        "component" : "jenkins",
-        "provider" : "fabric8"
-      }
-    }
-  }, {
-    "apiVersion" : "v1",
-    "kind" : "Service",
-    "metadata" : {
-      "annotations" : { },
-      "labels" : {
-        "provider" : "fabric8",
-        "component" : "jenkins-agent"
-      },
-      "name" : "jenkins-agent"
-    },
-    "spec" : {
-      "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "name" : "http",
         "port" : 80,
         "protocol" : "TCP",
         "targetPort" : 8080
-      }, {
-        "name" : "agent",
-        "port" : 50000,
-        "protocol" : "TCP",
-        "targetPort" : 50000
       } ],
       "selector" : {
         "provider" : "fabric8",
-        "component" : "jenkins"
+        "project" : "jenkins"
       },
       "type" : "LoadBalancer"
     }
@@ -94,18 +60,66 @@
       "annotations" : { },
       "labels" : {
         "provider" : "fabric8",
-        "component" : "jenkins-agent"
+        "project" : "jenkins"
       },
-      "name" : "jenkins-agent"
+      "name" : "jenkins"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "name" : "http",
         "port" : 80,
         "protocol" : "TCP",
         "targetPort" : 8080
-      }, {
+      } ],
+      "selector" : {
+        "provider" : "fabric8",
+        "project" : "jenkins"
+      },
+      "type" : "LoadBalancer"
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "provider" : "fabric8",
+        "project" : "jenkins"
+      },
+      "name" : "jenkins"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
+      "ports" : [ {
+        "name" : "http",
+        "port" : 80,
+        "protocol" : "TCP",
+        "targetPort" : 8080
+      } ],
+      "selector" : {
+        "provider" : "fabric8",
+        "project" : "jenkins"
+      },
+      "type" : "LoadBalancer"
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "provider" : "fabric8",
+        "project" : "jenkins"
+      },
+      "name" : "jenkins-jnlp"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
+      "ports" : [ {
         "name" : "agent",
         "port" : 50000,
         "protocol" : "TCP",
@@ -113,7 +127,59 @@
       } ],
       "selector" : {
         "provider" : "fabric8",
-        "component" : "jenkins"
+        "project" : "jenkins"
+      },
+      "type" : "LoadBalancer"
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "provider" : "fabric8",
+        "project" : "jenkins"
+      },
+      "name" : "jenkins-jnlp"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
+      "ports" : [ {
+        "name" : "agent",
+        "port" : 50000,
+        "protocol" : "TCP",
+        "targetPort" : 50000
+      } ],
+      "selector" : {
+        "provider" : "fabric8",
+        "project" : "jenkins"
+      },
+      "type" : "LoadBalancer"
+    }
+  }, {
+    "apiVersion" : "v1",
+    "kind" : "Service",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : {
+        "provider" : "fabric8",
+        "project" : "jenkins"
+      },
+      "name" : "jenkins-jnlp"
+    },
+    "spec" : {
+      "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
+      "ports" : [ {
+        "name" : "agent",
+        "port" : 50000,
+        "protocol" : "TCP",
+        "targetPort" : 50000
+      } ],
+      "selector" : {
+        "provider" : "fabric8",
+        "project" : "jenkins"
       },
       "type" : "LoadBalancer"
     }
@@ -122,17 +188,15 @@
     "kind" : "ReplicationController",
     "metadata" : {
       "annotations" : {
-        "fabric8.io/git-commit" : "c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/git-branch" : "release-v2.2.61",
-        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/build-id" : "6",
-        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/6"
+        "fabric8.io/git-commit" : "988f82625a978532bc677bd4ddd884c8c6176743",
+        "fabric8.io/git-branch" : "release-v2.2.157",
+        "fabric8.io/build-id" : "3"
       },
       "labels" : {
         "project" : "jenkins",
-        "component" : "jenkins",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "name" : "jenkins"
     },
@@ -140,21 +204,25 @@
       "replicas" : 1,
       "selector" : {
         "project" : "jenkins",
-        "component" : "jenkins",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "template" : {
         "metadata" : {
           "annotations" : {
             "fabric8.io/secret-ssh-key" : "jenkins-git-ssh,jenkins-master-ssh",
-            "fabric8.io/secret-gpg-key" : "jenkins-release-gpg"
+            "fabric8.io/secret-ssh-config" : "jenkins-ssh-config",
+            "fabric8.io/secret-gpg-key" : "jenkins-release-gpg",
+            "fabric8.io/secret-maven-settings" : "jenkins-maven-settings",
+            "fabric8.io/secret-hub-api-token" : "jenkins-hub-api-token",
+            "fabric8.io/secret-docker-cfg" : "jenkins-docker-cfg"
           },
           "labels" : {
             "project" : "jenkins",
-            "component" : "jenkins",
             "provider" : "fabric8",
-            "version" : "2.2.61"
+            "version" : "2.2.157",
+            "group" : "io.fabric8.devops.apps"
           }
         },
         "spec" : {
@@ -168,44 +236,8 @@
               "name" : "JENKINS_WORKFLOW_GIT_REPOSITORY",
               "value" : "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
             }, {
-              "name" : "DOCKER_REGISTRY_SERVER_ID",
-              "value" : "${DOCKER_REGISTRY_SERVER_ID}"
-            }, {
-              "name" : "SONATYPE_PASSWORD",
-              "value" : "${SONATYPE_PASSWORD}"
-            }, {
-              "name" : "GITHUB_TOKEN",
-              "value" : "${GITHUB_TOKEN}"
-            }, {
-              "name" : "SEED_GIT_URL",
-              "value" : "${SEED_GIT_URL}"
-            }, {
-              "name" : "DOCKER_REGISTRY_USERNAME",
-              "value" : "${DOCKER_REGISTRY_USERNAME}"
-            }, {
-              "name" : "JENKINS_GOGS_EMAIL",
-              "value" : "${JENKINS_GOGS_EMAIL}"
-            }, {
-              "name" : "DOCKER_REGISTRY_PASSWORD",
-              "value" : "${DOCKER_REGISTRY_PASSWORD}"
-            }, {
-              "name" : "JENKINS_SLAVE_IMAGE",
-              "value" : "${JENKINS_SLAVE_IMAGE}"
-            }, {
-              "name" : "JENKINS_JOBS_GIT_REPOSITORY",
-              "value" : "${JENKINS_JOBS_GIT_REPOSITORY}"
-            }, {
-              "name" : "CGO_ENABLED",
-              "value" : "0"
-            }, {
-              "name" : "FABRIC8_DEFAULT_ENVIRONMENTS",
-              "value" : "${FABRIC8_DEFAULT_ENVIRONMENTS}"
-            }, {
-              "name" : "NEXUS_PASSWORD",
-              "value" : "${NEXUS_PASSWORD}"
-            }, {
-              "name" : "SONATYPE_USERNAME",
-              "value" : "${SONATYPE_USERNAME}"
+              "name" : "PROJECT_VERSION",
+              "value" : "2.2.157"
             }, {
               "name" : "JENKINS_GOGS_PASSWORD",
               "value" : "${JENKINS_GOGS_PASSWORD}"
@@ -213,17 +245,14 @@
               "name" : "JENKINS_GOGS_USER",
               "value" : "${JENKINS_GOGS_USER}"
             }, {
-              "name" : "GPG_PASSPHRASE",
-              "value" : "${GPG_PASSPHRASE}"
+              "name" : "JENKINS_GOGS_EMAIL",
+              "value" : "${JENKINS_GOGS_EMAIL}"
             }, {
               "name" : "FABRIC8_CONSOLE",
               "value" : "http://fabric8.${DOMAIN}"
             }, {
-              "name" : "DOCKER_REGISTRY",
-              "value" : "${DOCKER_REGISTRY_PREFIX}"
-            }, {
-              "name" : "NEXUS_USERNAME",
-              "value" : "${NEXUS_USERNAME}"
+              "name" : "JENKINS_JOBS_GIT_REPOSITORY",
+              "value" : "${JENKINS_JOBS_GIT_REPOSITORY}"
             }, {
               "name" : "KUBERNETES_NAMESPACE",
               "valueFrom" : {
@@ -231,15 +260,8 @@
                   "fieldPath" : "metadata.namespace"
                 }
               }
-            }, {
-              "name" : "KUBERNETES_POD",
-              "valueFrom" : {
-                "fieldRef" : {
-                  "fieldPath" : "metadata.name"
-                }
-              }
             } ],
-            "image" : "fabric8/jenkernetes:2.2.61",
+            "image" : "fabric8/jenkins-docker:2.2.157",
             "imagePullPolicy" : "IfNotPresent",
             "lifecycle" : {
               "postStart" : {
@@ -260,194 +282,12 @@
               "privileged" : true
             },
             "volumeMounts" : [ {
-              "mountPath" : "/var/jenkins/.ssh-git",
-              "name" : "git-ssh",
-              "readOnly" : false
-            }, {
-              "mountPath" : "/var/jenkins_home",
-              "name" : "jenkins-workspace",
-              "readOnly" : false
-            }, {
-              "mountPath" : "/root/.gnupg",
-              "name" : "gpg-key",
-              "readOnly" : false
-            }, {
-              "mountPath" : "/home/jenkins/ssh-keys",
-              "name" : "jenkins-master-key",
-              "readOnly" : false
-            }, {
               "mountPath" : "/var/run/docker.sock",
-              "name" : "docker-socket",
-              "readOnly" : false
-            } ]
-          } ],
-          "imagePullSecrets" : [ ],
-          "nodeSelector" : { },
-          "serviceAccountName" : "jenkins",
-          "volumes" : [ {
-            "name" : "gpg-key",
-            "secret" : {
-              "secretName" : "jenkins-release-gpg"
-            }
-          }, {
-            "hostPath" : {
-              "path" : "/var/run/docker.sock"
-            },
-            "name" : "docker-socket"
-          }, {
-            "name" : "jenkins-master-key",
-            "secret" : {
-              "secretName" : "jenkins-master-ssh"
-            }
-          }, {
-            "emptyDir" : {
-              "medium" : ""
-            },
-            "name" : "jenkins-workspace"
-          }, {
-            "name" : "git-ssh",
-            "secret" : {
-              "secretName" : "jenkins-git-ssh"
-            }
-          } ]
-        }
-      }
-    }
-  }, {
-    "apiVersion" : "v1",
-    "kind" : "ReplicationController",
-    "metadata" : {
-      "annotations" : { },
-      "labels" : { },
-      "name" : "jenkins-swarm-client"
-    },
-    "spec" : {
-      "replicas" : 1,
-      "selector" : {
-        "provider" : "fabric8",
-        "component" : "jenkins-swarm-client"
-      },
-      "template" : {
-        "metadata" : {
-          "annotations" : { },
-          "labels" : {
-            "provider" : "fabric8",
-            "component" : "jenkins-swarm-client"
-          }
-        },
-        "spec" : {
-          "containers" : [ {
-            "args" : [ ],
-            "command" : [ ],
-            "env" : [ {
-              "name" : "DOMAIN",
-              "value" : "${DOMAIN}"
-            }, {
-              "name" : "JENKINS_WORKFLOW_GIT_REPOSITORY",
-              "value" : "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
-            }, {
-              "name" : "JENKINS_WORKFLOW_GIT_REPOSITORY",
-              "value" : "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
-            }, {
-              "name" : "SONATYPE_PASSWORD",
-              "value" : "${SONATYPE_PASSWORD}"
-            }, {
-              "name" : "GITHUB_TOKEN",
-              "value" : "${GITHUB_TOKEN}"
-            }, {
-              "name" : "DOCKER_REGISTRY_USERNAME",
-              "value" : "${DOCKER_REGISTRY_USERNAME}"
-            }, {
-              "name" : "JENKINS_GOGS_EMAIL",
-              "value" : "${JENKINS_GOGS_EMAIL}"
-            }, {
-              "name" : "DOCKER_REGISTRY_SERVER_ID",
-              "value" : "${DOCKER_REGISTRY_SERVER_ID}"
-            }, {
-              "name" : "DOCKER_REGISTRY_PASSWORD",
-              "value" : "${DOCKER_REGISTRY_PASSWORD}"
-            }, {
-              "name" : "DOCKER_REGISTRY_PASSWORD",
-              "value" : "${DOCKER_REGISTRY_PASSWORD}"
-            }, {
-              "name" : "DOCKER_REGISTRY",
-              "value" : "${DOCKER_REGISTRY_PREFIX}"
-            }, {
-              "name" : "JENKINS_JOBS_GIT_REPOSITORY",
-              "value" : "${JENKINS_JOBS_GIT_REPOSITORY}"
-            }, {
-              "name" : "CGO_ENABLED",
-              "value" : "${CGO_ENABLED}"
-            }, {
-              "name" : "FABRIC8_DEFAULT_ENVIRONMENTS",
-              "value" : "${FABRIC8_DEFAULT_ENVIRONMENTS}"
-            }, {
-              "name" : "SONATYPE_USERNAME",
-              "value" : "${SONATYPE_USERNAME}"
-            }, {
-              "name" : "JENKINS_GOGS_PASSWORD",
-              "value" : "${JENKINS_GOGS_PASSWORD}"
-            }, {
-              "name" : "JENKINS_GOGS_USER",
-              "value" : "${JENKINS_GOGS_USER}"
-            }, {
-              "name" : "GPG_PASSPHRASE",
-              "value" : "${GPG_PASSPHRASE}"
-            }, {
-              "name" : "GITHUB_AUTH_TOKEN",
-              "value" : "${GITHUB_AUTH_TOKEN}"
-            }, {
-              "name" : "GITHUB_AUTH_TOKEN",
-              "value" : "${GITHUB_AUTH_TOKEN}"
-            }, {
-              "name" : "NEXUS_USERNAME",
-              "value" : "${NEXUS_USERNAME}"
-            }, {
-              "name" : "NEXUS_PASSWORD",
-              "value" : "${NEXUS_PASSWORD}"
-            }, {
-              "name" : "KUBERNETES_NAMESPACE",
-              "valueFrom" : {
-                "fieldRef" : {
-                  "fieldPath" : "metadata.namespace"
-                }
-              }
-            } ],
-            "image" : "fabric8/jenkins-swarm-client:2.2.61",
-            "lifecycle" : {
-              "postStart" : {
-                "exec" : {
-                  "command" : [ "/var/jenkins_home/postStart.sh" ]
-                }
-              }
-            },
-            "name" : "jenkins-swarm-client",
-            "ports" : [ {
-              "containerPort" : 8080,
-              "name" : "http"
-            } ],
-            "securityContext" : {
-              "privileged" : true
-            },
-            "volumeMounts" : [ {
-              "mountPath" : "/var/jenkins_home/workspace",
-              "name" : "jenkins-workspace",
+              "name" : "data",
               "readOnly" : false
             }, {
-              "mountPath" : "/var/jenkins/.ssh-git",
-              "name" : "git-ssh",
-              "readOnly" : false
-            }, {
-              "mountPath" : "/root/.gnupg",
-              "name" : "gpg-key",
-              "readOnly" : false
-            }, {
-              "mountPath" : "/home/jenkins/ssh-keys",
-              "name" : "jenkins-master-key",
-              "readOnly" : false
-            }, {
-              "mountPath" : "/var/run/docker.sock",
-              "name" : "docker-socket",
+              "mountPath" : "/home/jenkins/.docker",
+              "name" : "jenkins-docker-cfg",
               "readOnly" : false
             } ]
           } ],
@@ -456,277 +296,41 @@
           "serviceAccountName" : "jenkins",
           "volumes" : [ {
             "hostPath" : {
-              "path" : "/var/jenkins_home/workspace"
-            },
-            "name" : "jenkins-workspace"
-          }, {
-            "name" : "git-ssh",
-            "secret" : {
-              "secretName" : "jenkins-git-ssh"
-            }
-          }, {
-            "name" : "gpg-key",
-            "secret" : {
-              "secretName" : "jenkins-release-gpg"
-            }
-          }, {
-            "name" : "jenkins-master-key",
-            "secret" : {
-              "secretName" : "jenkins-master-ssh"
-            }
-          }, {
-            "hostPath" : {
               "path" : "/var/run/docker.sock"
             },
-            "name" : "docker-socket"
-          } ]
-        }
-      }
-    }
-  }, {
-    "apiVersion" : "v1",
-    "kind" : "ReplicationController",
-    "metadata" : {
-      "annotations" : { },
-      "labels" : { },
-      "name" : "jenkins-swarm-client"
-    },
-    "spec" : {
-      "replicas" : 1,
-      "selector" : {
-        "provider" : "fabric8",
-        "component" : "jenkins-swarm-client"
-      },
-      "template" : {
-        "metadata" : {
-          "annotations" : { },
-          "labels" : {
-            "provider" : "fabric8",
-            "component" : "jenkins-swarm-client"
-          }
-        },
-        "spec" : {
-          "containers" : [ {
-            "args" : [ ],
-            "command" : [ ],
-            "env" : [ {
-              "name" : "DOMAIN",
-              "value" : "${DOMAIN}"
-            }, {
-              "name" : "JENKINS_WORKFLOW_GIT_REPOSITORY",
-              "value" : "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
-            }, {
-              "name" : "JENKINS_WORKFLOW_GIT_REPOSITORY",
-              "value" : "${JENKINS_WORKFLOW_GIT_REPOSITORY}"
-            }, {
-              "name" : "SONATYPE_PASSWORD",
-              "value" : "${SONATYPE_PASSWORD}"
-            }, {
-              "name" : "GITHUB_TOKEN",
-              "value" : "${GITHUB_TOKEN}"
-            }, {
-              "name" : "DOCKER_REGISTRY_USERNAME",
-              "value" : "${DOCKER_REGISTRY_USERNAME}"
-            }, {
-              "name" : "JENKINS_GOGS_EMAIL",
-              "value" : "${JENKINS_GOGS_EMAIL}"
-            }, {
-              "name" : "DOCKER_REGISTRY_SERVER_ID",
-              "value" : "${DOCKER_REGISTRY_SERVER_ID}"
-            }, {
-              "name" : "DOCKER_REGISTRY_PASSWORD",
-              "value" : "${DOCKER_REGISTRY_PASSWORD}"
-            }, {
-              "name" : "DOCKER_REGISTRY_PASSWORD",
-              "value" : "${DOCKER_REGISTRY_PASSWORD}"
-            }, {
-              "name" : "DOCKER_REGISTRY",
-              "value" : "${DOCKER_REGISTRY_PREFIX}"
-            }, {
-              "name" : "JENKINS_JOBS_GIT_REPOSITORY",
-              "value" : "${JENKINS_JOBS_GIT_REPOSITORY}"
-            }, {
-              "name" : "CGO_ENABLED",
-              "value" : "${CGO_ENABLED}"
-            }, {
-              "name" : "FABRIC8_DEFAULT_ENVIRONMENTS",
-              "value" : "${FABRIC8_DEFAULT_ENVIRONMENTS}"
-            }, {
-              "name" : "SONATYPE_USERNAME",
-              "value" : "${SONATYPE_USERNAME}"
-            }, {
-              "name" : "JENKINS_GOGS_PASSWORD",
-              "value" : "${JENKINS_GOGS_PASSWORD}"
-            }, {
-              "name" : "JENKINS_GOGS_USER",
-              "value" : "${JENKINS_GOGS_USER}"
-            }, {
-              "name" : "GPG_PASSPHRASE",
-              "value" : "${GPG_PASSPHRASE}"
-            }, {
-              "name" : "GITHUB_AUTH_TOKEN",
-              "value" : "${GITHUB_AUTH_TOKEN}"
-            }, {
-              "name" : "GITHUB_AUTH_TOKEN",
-              "value" : "${GITHUB_AUTH_TOKEN}"
-            }, {
-              "name" : "NEXUS_USERNAME",
-              "value" : "${NEXUS_USERNAME}"
-            }, {
-              "name" : "NEXUS_PASSWORD",
-              "value" : "${NEXUS_PASSWORD}"
-            }, {
-              "name" : "KUBERNETES_NAMESPACE",
-              "valueFrom" : {
-                "fieldRef" : {
-                  "fieldPath" : "metadata.namespace"
-                }
-              }
-            } ],
-            "image" : "fabric8/jenkins-swarm-client:2.2.61",
-            "lifecycle" : {
-              "postStart" : {
-                "exec" : {
-                  "command" : [ "/var/jenkins_home/postStart.sh" ]
-                }
-              }
-            },
-            "name" : "jenkins-swarm-client",
-            "ports" : [ {
-              "containerPort" : 8080,
-              "name" : "http"
-            } ],
-            "securityContext" : {
-              "privileged" : true
-            },
-            "volumeMounts" : [ {
-              "mountPath" : "/var/jenkins_home/workspace",
-              "name" : "jenkins-workspace",
-              "readOnly" : false
-            }, {
-              "mountPath" : "/var/jenkins/.ssh-git",
-              "name" : "git-ssh",
-              "readOnly" : false
-            }, {
-              "mountPath" : "/root/.gnupg",
-              "name" : "gpg-key",
-              "readOnly" : false
-            }, {
-              "mountPath" : "/home/jenkins/ssh-keys",
-              "name" : "jenkins-master-key",
-              "readOnly" : false
-            }, {
-              "mountPath" : "/var/run/docker.sock",
-              "name" : "docker-socket",
-              "readOnly" : false
-            } ]
-          } ],
-          "imagePullSecrets" : [ ],
-          "nodeSelector" : { },
-          "serviceAccountName" : "jenkins",
-          "volumes" : [ {
-            "hostPath" : {
-              "path" : "/var/jenkins_home/workspace"
-            },
-            "name" : "jenkins-workspace"
+            "name" : "data"
           }, {
-            "name" : "git-ssh",
+            "name" : "jenkins-docker-cfg",
             "secret" : {
-              "secretName" : "jenkins-git-ssh"
+              "secretName" : "jenkins-docker-cfg"
             }
-          }, {
-            "name" : "gpg-key",
-            "secret" : {
-              "secretName" : "jenkins-release-gpg"
-            }
-          }, {
-            "name" : "jenkins-master-key",
-            "secret" : {
-              "secretName" : "jenkins-master-ssh"
-            }
-          }, {
-            "hostPath" : {
-              "path" : "/var/run/docker.sock"
-            },
-            "name" : "docker-socket"
           } ]
         }
       }
     }
   } ],
   "parameters" : [ {
-    "description" : "The password for Jenkins to login to Gogs",
-    "name" : "JENKINS_GOGS_PASSWORD",
-    "value" : "RedHat$1"
+    "description" : "The email address of the Jenkins user on Gogs",
+    "name" : "JENKINS_GOGS_EMAIL",
+    "value" : "gogsadmin@fabric8.local"
   }, {
-    "description" : "The default registry, docker image prefix that new fabric8 projects will use",
-    "name" : "DOCKER_REGISTRY_PREFIX",
-    "value" : "docker.io/"
-  }, {
-    "description" : "Optional repository that contains build config.xml.  Example https://github.com/fabric8io/fabric8-workflow-jobs-release.git",
+    "description" : "Optional repository that contains a collection of build config.xml that will create Jenkins jobs when started.  Example fabric8 release jobs https://github.com/fabric8io/fabric8-workflow-jobs-release.git",
     "name" : "JENKINS_JOBS_GIT_REPOSITORY"
-  }, {
-    "description" : "Username used to authenticate with Sonartype when deploying artifacts",
-    "name" : "SONATYPE_USERNAME",
-    "value" : "jenkins"
   }, {
     "description" : "The user name for Jenkins to login to Gogs",
     "name" : "JENKINS_GOGS_USER",
     "value" : "gogsadmin"
   }, {
-    "description" : "The docker image used for jenkins slave when using the Docker Cloud",
-    "name" : "JENKINS_SLAVE_IMAGE",
-    "value" : "fabric8/jenkins-slave"
-  }, {
-    "description" : "The email address of the Jenkins user on Gogs",
-    "name" : "JENKINS_GOGS_EMAIL",
-    "value" : "gogsadmin@fabric8.local"
-  }, {
-    "description" : "Password used to authenticate with Sonartype when deploying artifacts",
-    "name" : "SONATYPE_PASSWORD",
+    "description" : "The password for Jenkins to login to Gogs",
+    "name" : "JENKINS_GOGS_PASSWORD",
     "value" : "RedHat$1"
   }, {
-    "description" : "GPG passphrase used to sign artifacts when building",
-    "name" : "GPG_PASSPHRASE",
-    "value" : "mysupersecretpassphrase"
-  }, {
-    "description" : "The list of default environment names to actual kubernetes namespaces",
-    "name" : "FABRIC8_DEFAULT_ENVIRONMENTS",
-    "value" : "Staging=${buildName}-staging,Production=${buildName}-prod"
-  }, {
-    "description" : "The git clone URL for the jenkins workflow repository which can be reused across projects",
+    "description" : "The Git URL for the jenkins global workflow repository.  For more info see https://github.com/jenkinsci/workflow-plugin/tree/master/cps-global-lib",
     "name" : "JENKINS_WORKFLOW_GIT_REPOSITORY",
     "value" : "https://github.com/fabric8io/jenkins-workflow-library.git"
   }, {
     "description" : "The domain name applications are installed on",
     "name" : "DOMAIN",
     "value" : "vagrant.f8"
-  }, {
-    "description" : "Username used to authenticate with a docker docker registry",
-    "name" : "DOCKER_REGISTRY_USERNAME",
-    "value" : "jenkins"
-  }, {
-    "description" : "Nexus username",
-    "name" : "NEXUS_USERNAME",
-    "value" : "admin"
-  }, {
-    "description" : "Optional token used to authenticate when making Pull Requests with GitHub",
-    "name" : "GITHUB_TOKEN"
-  }, {
-    "description" : "Docker registry server id.  Set to docker.io if using docker-maven-plugin to authenticate with DockerHub http://ro14nd.de/docker-maven-plugin/authentication.html",
-    "name" : "DOCKER_REGISTRY_SERVER_ID",
-    "value" : "unused"
-  }, {
-    "description" : "Password used to authenticate with a docker docker registry",
-    "name" : "DOCKER_REGISTRY_PASSWORD",
-    "value" : "RedHat$1"
-  }, {
-    "description" : "Nexus password",
-    "name" : "NEXUS_PASSWORD",
-    "value" : "admin123"
-  }, {
-    "description" : "The git URL of the seed build used to generate builds",
-    "name" : "SEED_GIT_URL",
-    "value" : "https://github.com/fabric8io/default-jenkins-dsl.git"
   } ]
 }

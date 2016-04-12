@@ -5,15 +5,12 @@
   "metadata" : {
     "annotations" : {
       "fabric8.orion/summary" : "[Orion](http://eclipse.org/orion/) is a web based IDE for working files in a git repository",
-      "description" : "Provides an Open Source issue tracker via [Taiga](https://taiga.io/) and a web based IDE via <a href=\"http://eclipse.org/orion/\" target=\"orion\">Orion</a>",
+      "description" : "Provides an Open Source issue tracker via [Taiga](https://taiga.io/) NOTE: default username/password admin/123123 and a web based IDE via <a href=\"http://eclipse.org/orion/\" target=\"orion\">Orion</a>\n",
       "fabric8.orion/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/orion/src/main/fabric8/icon.png",
       "fabric8.social/summary" : "Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/",
       "fabric8.social/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/packages/social/src/main/fabric8/icon.png"
     },
-    "labels" : {
-      "provider" : "fabric8",
-      "component" : "taiga"
-    },
+    "labels" : { },
     "name" : "social"
   },
   "objects" : [ {
@@ -23,14 +20,16 @@
       "annotations" : { },
       "labels" : {
         "project" : "orion",
-        "component" : "orion",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps",
+        "package" : "social"
       },
       "name" : "orion"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 80,
         "protocol" : "TCP",
@@ -38,8 +37,8 @@
       } ],
       "selector" : {
         "project" : "orion",
-        "component" : "orion",
-        "provider" : "fabric8"
+        "provider" : "fabric8",
+        "group" : "io.fabric8.devops.apps"
       },
       "type" : "LoadBalancer"
     }
@@ -50,19 +49,21 @@
       "annotations" : { },
       "labels" : {
         "provider" : "fabric8",
-        "component" : "taiga"
+        "project" : "taiga",
+        "package" : "social"
       },
       "name" : "taiga"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 80,
         "targetPort" : 80
       } ],
       "selector" : {
         "provider" : "fabric8",
-        "component" : "taiga"
+        "project" : "taiga"
       },
       "type" : "LoadBalancer"
     }
@@ -73,19 +74,21 @@
       "annotations" : { },
       "labels" : {
         "provider" : "fabric8",
-        "component" : "taiga"
+        "project" : "taiga",
+        "package" : "social"
       },
       "name" : "taigaback"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 8000,
         "targetPort" : 8000
       } ],
       "selector" : {
         "provider" : "fabric8",
-        "component" : "taiga"
+        "project" : "taiga"
       }
     }
   }, {
@@ -93,17 +96,16 @@
     "kind" : "ReplicationController",
     "metadata" : {
       "annotations" : {
-        "fabric8.io/git-branch" : "release-v2.2.61",
-        "fabric8.io/git-commit" : "c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/6",
-        "fabric8.io/build-id" : "6"
+        "fabric8.io/git-branch" : "release-v2.2.157",
+        "fabric8.io/git-commit" : "988f82625a978532bc677bd4ddd884c8c6176743",
+        "fabric8.io/build-id" : "3"
       },
       "labels" : {
         "project" : "orion",
-        "component" : "orion",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps",
+        "package" : "social"
       },
       "name" : "orion"
     },
@@ -111,18 +113,19 @@
       "replicas" : 1,
       "selector" : {
         "project" : "orion",
-        "component" : "orion",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "template" : {
         "metadata" : {
           "annotations" : { },
           "labels" : {
             "project" : "orion",
-            "component" : "orion",
             "provider" : "fabric8",
-            "version" : "2.2.61"
+            "version" : "2.2.157",
+            "group" : "io.fabric8.devops.apps",
+            "package" : "social"
           }
         },
         "spec" : {
@@ -137,7 +140,7 @@
                 }
               }
             } ],
-            "image" : "fabric8/eclipse-orion:2.2.61",
+            "image" : "fabric8/eclipse-orion:2.2.157",
             "imagePullPolicy" : "IfNotPresent",
             "name" : "orion",
             "ports" : [ {
@@ -158,15 +161,14 @@
     "kind" : "ReplicationController",
     "metadata" : {
       "annotations" : {
-        "fabric8.io/git-branch" : "release-v2.2.61",
-        "fabric8.io/git-commit" : "c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/6",
-        "fabric8.io/build-id" : "6"
+        "fabric8.io/git-branch" : "release-v2.2.157",
+        "fabric8.io/git-commit" : "988f82625a978532bc677bd4ddd884c8c6176743",
+        "fabric8.io/build-id" : "3"
       },
       "labels" : {
         "provider" : "fabric8",
-        "component" : "taiga"
+        "project" : "taiga",
+        "package" : "social"
       },
       "name" : "taiga"
     },
@@ -174,14 +176,15 @@
       "replicas" : 1,
       "selector" : {
         "provider" : "fabric8",
-        "component" : "taiga"
+        "project" : "taiga"
       },
       "template" : {
         "metadata" : {
           "annotations" : { },
           "labels" : {
             "provider" : "fabric8",
-            "component" : "taiga"
+            "project" : "taiga",
+            "package" : "social"
           },
           "name" : "taiga"
         },
@@ -219,7 +222,7 @@
               "name" : "POSTGRES_ENV_POSTGRES_PASSWORD",
               "value" : "password"
             } ],
-            "image" : "fabric8/taiga-back:2.2.61",
+            "image" : "fabric8/taiga-back:2.2.157",
             "name" : "taiga-backend",
             "ports" : [ {
               "containerPort" : 8000,
@@ -239,7 +242,7 @@
             "args" : [ ],
             "command" : [ ],
             "env" : [ ],
-            "image" : "fabric8/taiga-front:2.2.61",
+            "image" : "fabric8/taiga-front:2.2.157",
             "name" : "taiga-frontend",
             "ports" : [ {
               "containerPort" : 80,

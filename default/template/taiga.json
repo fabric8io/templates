@@ -6,7 +6,7 @@
     "annotations" : { },
     "labels" : {
       "provider" : "fabric8",
-      "component" : "taiga"
+      "project" : "taiga"
     },
     "name" : "taiga"
   },
@@ -17,19 +17,20 @@
       "annotations" : { },
       "labels" : {
         "provider" : "fabric8",
-        "component" : "taiga"
+        "project" : "taiga"
       },
       "name" : "taiga"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 80,
         "targetPort" : 80
       } ],
       "selector" : {
         "provider" : "fabric8",
-        "component" : "taiga"
+        "project" : "taiga"
       },
       "type" : "LoadBalancer"
     }
@@ -40,19 +41,20 @@
       "annotations" : { },
       "labels" : {
         "provider" : "fabric8",
-        "component" : "taiga"
+        "project" : "taiga"
       },
       "name" : "taigaback"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 8000,
         "targetPort" : 8000
       } ],
       "selector" : {
         "provider" : "fabric8",
-        "component" : "taiga"
+        "project" : "taiga"
       }
     }
   }, {
@@ -62,7 +64,7 @@
       "annotations" : { },
       "labels" : {
         "provider" : "fabric8",
-        "component" : "taiga"
+        "project" : "taiga"
       },
       "name" : "taiga"
     },
@@ -70,14 +72,14 @@
       "replicas" : 1,
       "selector" : {
         "provider" : "fabric8",
-        "component" : "taiga"
+        "project" : "taiga"
       },
       "template" : {
         "metadata" : {
           "annotations" : { },
           "labels" : {
             "provider" : "fabric8",
-            "component" : "taiga"
+            "project" : "taiga"
           },
           "name" : "taiga"
         },
@@ -115,7 +117,7 @@
               "name" : "POSTGRES_ENV_POSTGRES_PASSWORD",
               "value" : "password"
             } ],
-            "image" : "fabric8/taiga-back:2.2.61",
+            "image" : "fabric8/taiga-back:2.2.157",
             "name" : "taiga-backend",
             "ports" : [ {
               "containerPort" : 8000,
@@ -135,7 +137,7 @@
             "args" : [ ],
             "command" : [ ],
             "env" : [ ],
-            "image" : "fabric8/taiga-front:2.2.61",
+            "image" : "fabric8/taiga-front:2.2.157",
             "name" : "taiga-frontend",
             "ports" : [ {
               "containerPort" : 80,

@@ -32,12 +32,13 @@
       "annotations" : { },
       "labels" : {
         "provider" : "fabric8",
-        "component" : "gerrit"
+        "project" : "gerrit"
       },
       "name" : "gerrit"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 80,
         "protocol" : "TCP",
@@ -45,7 +46,7 @@
       } ],
       "selector" : {
         "provider" : "fabric8",
-        "component" : "gerrit"
+        "project" : "gerrit"
       },
       "type" : "LoadBalancer"
     }
@@ -56,12 +57,13 @@
       "annotations" : { },
       "labels" : {
         "provider" : "fabric8",
-        "component" : "gerrit"
+        "project" : "gerrit"
       },
       "name" : "gerrit-ssh"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 29418,
         "protocol" : "TCP",
@@ -69,7 +71,7 @@
       } ],
       "selector" : {
         "provider" : "fabric8",
-        "component" : "gerrit"
+        "project" : "gerrit"
       }
     }
   }, {
@@ -77,17 +79,15 @@
     "kind" : "ReplicationController",
     "metadata" : {
       "annotations" : {
-        "fabric8.io/git-commit" : "c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/git-branch" : "release-v2.2.61",
-        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/build-id" : "6",
-        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/6"
+        "fabric8.io/git-commit" : "988f82625a978532bc677bd4ddd884c8c6176743",
+        "fabric8.io/git-branch" : "release-v2.2.157",
+        "fabric8.io/build-id" : "3"
       },
       "labels" : {
         "project" : "gerrit",
-        "component" : "gerrit",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "name" : "gerrit"
     },
@@ -95,9 +95,9 @@
       "replicas" : 1,
       "selector" : {
         "project" : "gerrit",
-        "component" : "gerrit",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "template" : {
         "metadata" : {
@@ -107,9 +107,9 @@
           },
           "labels" : {
             "project" : "gerrit",
-            "component" : "gerrit",
             "provider" : "fabric8",
-            "version" : "2.2.61"
+            "version" : "2.2.157",
+            "group" : "io.fabric8.devops.apps"
           }
         },
         "spec" : {
@@ -187,22 +187,15 @@
                 }
               }
             } ],
-            "image" : "fabric8/gerrit:2.2.61",
+            "image" : "fabric8/gerrit:2.2.157",
             "imagePullPolicy" : "IfNotPresent",
             "name" : "gerrit",
             "ports" : [ {
               "containerPort" : 8080,
               "name" : "http"
-            }, {
-              "containerPort" : 8778,
-              "name" : "jolokia"
             } ],
             "securityContext" : { },
             "volumeMounts" : [ {
-              "mountPath" : "/home/gerrit/site",
-              "name" : "gerrit-workspace",
-              "readOnly" : false
-            }, {
               "mountPath" : "/root/.ssh",
               "name" : "gerrit-admin-ssh-key",
               "readOnly" : false
@@ -216,11 +209,6 @@
           "nodeSelector" : { },
           "serviceAccountName" : "gerrit",
           "volumes" : [ {
-            "hostPath" : {
-              "path" : "/home/gerrit-site"
-            },
-            "name" : "gerrit-workspace"
-          }, {
             "name" : "gerrit-admin-ssh-key",
             "secret" : {
               "secretName" : "gerrit-admin-ssh"

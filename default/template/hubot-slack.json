@@ -19,6 +19,7 @@
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 80,
         "targetPort" : 8080
@@ -68,7 +69,7 @@
               "name" : "HUBOT_JENKINS_URL",
               "value" : "${HUBOT_JENKINS_URL}"
             } ],
-            "image" : "fabric8/hubot-slack:2.2.61",
+            "image" : "fabric8/hubot-slack:2.2.157",
             "name" : "hubot-slack",
             "ports" : [ {
               "containerPort" : 8080,

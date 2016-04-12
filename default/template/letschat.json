@@ -5,7 +5,8 @@
   "metadata" : {
     "annotations" : { },
     "labels" : {
-      "name" : "letschat"
+      "name" : "letschat",
+      "provider" : "fabric8"
     },
     "name" : "letschat"
   },
@@ -19,6 +20,7 @@
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 80,
         "targetPort" : 5000
@@ -34,7 +36,8 @@
     "metadata" : {
       "annotations" : { },
       "labels" : {
-        "name" : "letschat"
+        "name" : "letschat",
+        "provider" : "fabric8"
       },
       "name" : "letschat"
     },
@@ -47,7 +50,8 @@
         "metadata" : {
           "annotations" : { },
           "labels" : {
-            "name" : "letschat"
+            "name" : "letschat",
+            "provider" : "fabric8"
           },
           "name" : "letschat"
         },
@@ -74,10 +78,10 @@
               "value" : "${LETSCHAT_HUBOT_TOKEN}"
             }, {
               "name" : "LETSCHAT_HUBOT_PASSWORD",
-              "value" : "${LETSCHAT_HUBOT_PASSWORD}"
+              "value" : "${HUBOT_PASSWORD}"
             }, {
               "name" : "LETSCHAT_HUBOT_USERNAME",
-              "value" : "fabric8"
+              "value" : "${HUBOT_USERNAME}"
             }, {
               "name" : "LETSCHAT_HUBOT_EMAIL",
               "value" : "fabric8-admin@googlegroups.com"
@@ -103,7 +107,7 @@
               "name" : "LCB_DATABASE_URI",
               "value" : "mongodb://127.0.0.1:27017/letschat"
             } ],
-            "image" : "fabric8/lets-chat:2.2.61",
+            "image" : "fabric8/lets-chat:2.2.157",
             "name" : "letschat",
             "ports" : [ {
               "containerPort" : 5000,
@@ -123,8 +127,12 @@
     "name" : "LETSCHAT_DEFAULT_ROOMS",
     "value" : "fabric8_default"
   }, {
-    "description" : "The password for Hubot to login to Let's Chat",
-    "name" : "LETSCHAT_HUBOT_PASSWORD",
+    "description" : "The username for Hubot to login to the chat service",
+    "name" : "HUBOT_USERNAME",
+    "value" : "fabric8"
+  }, {
+    "description" : "The password for Hubot to login to the chat service",
+    "name" : "HUBOT_PASSWORD",
     "value" : "RedHat$1"
   } ]
 }

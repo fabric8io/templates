@@ -13,6 +13,19 @@
   },
   "objects" : [ {
     "apiVersion" : "v1",
+    "data" : {
+      "password" : "UmVkSGF0JDE=",
+      "username" : "Z29nc2FkbWlu"
+    },
+    "kind" : "Secret",
+    "metadata" : {
+      "annotations" : { },
+      "labels" : { },
+      "name" : "gogs-https-${KUBERNETES_ADMIN_USER}",
+      "namespace" : "user-secrets-source-${KUBERNETES_ADMIN_USER}"
+    }
+  }, {
+    "apiVersion" : "v1",
     "kind" : "OAuthClient",
     "metadata" : {
       "annotations" : { },
@@ -26,23 +39,26 @@
     "metadata" : {
       "annotations" : { },
       "labels" : {
+        "project" : "gogs",
         "provider" : "fabric8",
-        "component" : "gogs"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "name" : "gogs"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 80,
         "protocol" : "TCP",
         "targetPort" : 3000
       } ],
       "selector" : {
+        "project" : "gogs",
         "provider" : "fabric8",
-        "component" : "gogs"
-      },
-      "type" : "LoadBalancer"
+        "group" : "io.fabric8.devops.apps"
+      }
     }
   }, {
     "apiVersion" : "v1",
@@ -50,21 +66,25 @@
     "metadata" : {
       "annotations" : { },
       "labels" : {
+        "project" : "gogs",
         "provider" : "fabric8",
-        "component" : "gogs"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "name" : "gogs-ssh"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 22,
         "protocol" : "TCP",
         "targetPort" : 22
       } ],
       "selector" : {
+        "project" : "gogs",
         "provider" : "fabric8",
-        "component" : "gogs"
+        "group" : "io.fabric8.devops.apps"
       }
     }
   }, {
@@ -72,17 +92,15 @@
     "kind" : "ReplicationController",
     "metadata" : {
       "annotations" : {
-        "fabric8.io/git-commit" : "c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/git-branch" : "release-v2.2.61",
-        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/build-id" : "6",
-        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/6"
+        "fabric8.io/git-commit" : "988f82625a978532bc677bd4ddd884c8c6176743",
+        "fabric8.io/git-branch" : "release-v2.2.157",
+        "fabric8.io/build-id" : "3"
       },
       "labels" : {
         "project" : "gogs",
-        "component" : "gogs",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "name" : "gogs"
     },
@@ -90,18 +108,18 @@
       "replicas" : 1,
       "selector" : {
         "project" : "gogs",
-        "component" : "gogs",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "template" : {
         "metadata" : {
           "annotations" : { },
           "labels" : {
             "project" : "gogs",
-            "component" : "gogs",
             "provider" : "fabric8",
-            "version" : "2.2.61"
+            "version" : "2.2.157",
+            "group" : "io.fabric8.devops.apps"
           }
         },
         "spec" : {
@@ -154,6 +172,9 @@
               "name" : "GOGS_OAUTH__ENABLED",
               "value" : "true"
             }, {
+              "name" : "KUBERNETES_ADMIN_USER",
+              "value" : "${KUBERNETES_ADMIN_USER}"
+            }, {
               "name" : "GOGS_OAUTH_OPENSHIFT__CLIENT_ID",
               "value" : "gogs"
             }, {
@@ -179,6 +200,7 @@
           } ],
           "imagePullSecrets" : [ ],
           "nodeSelector" : { },
+          "serviceAccountName" : "gogs",
           "volumes" : [ ]
         }
       }
@@ -204,6 +226,10 @@
     "description" : "The password for Jenkins to login to Gogs",
     "name" : "JENKINS_GOGS_PASSWORD",
     "value" : "RedHat$1"
+  }, {
+    "description" : "The default Kubernetes admin user",
+    "name" : "KUBERNETES_ADMIN_USER",
+    "value" : "admin"
   }, {
     "description" : "The domain name applications are installed on",
     "name" : "DOMAIN",

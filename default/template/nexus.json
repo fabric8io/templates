@@ -18,14 +18,15 @@
       "annotations" : { },
       "labels" : {
         "project" : "nexus",
-        "component" : "nexus",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "name" : "nexus"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 80,
         "protocol" : "TCP",
@@ -33,8 +34,8 @@
       } ],
       "selector" : {
         "project" : "nexus",
-        "component" : "nexus",
-        "provider" : "fabric8"
+        "provider" : "fabric8",
+        "group" : "io.fabric8.devops.apps"
       },
       "type" : "LoadBalancer"
     }
@@ -43,17 +44,15 @@
     "kind" : "ReplicationController",
     "metadata" : {
       "annotations" : {
-        "fabric8.io/git-branch" : "release-v2.2.61",
-        "fabric8.io/git-commit" : "c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/6",
-        "fabric8.io/build-id" : "6"
+        "fabric8.io/git-branch" : "release-v2.2.157",
+        "fabric8.io/git-commit" : "988f82625a978532bc677bd4ddd884c8c6176743",
+        "fabric8.io/build-id" : "3"
       },
       "labels" : {
         "project" : "nexus",
-        "component" : "nexus",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "name" : "nexus"
     },
@@ -61,18 +60,18 @@
       "replicas" : 1,
       "selector" : {
         "project" : "nexus",
-        "component" : "nexus",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "template" : {
         "metadata" : {
           "annotations" : { },
           "labels" : {
             "project" : "nexus",
-            "component" : "nexus",
             "provider" : "fabric8",
-            "version" : "2.2.61"
+            "version" : "2.2.157",
+            "group" : "io.fabric8.devops.apps"
           }
         },
         "spec" : {
@@ -80,12 +79,6 @@
             "args" : [ ],
             "command" : [ ],
             "env" : [ {
-              "name" : "SONATYPE_USERNAME",
-              "value" : "${SONATYPE_USERNAME}"
-            }, {
-              "name" : "SONATYPE_PASSWORD",
-              "value" : "${SONATYPE_PASSWORD}"
-            }, {
               "name" : "KUBERNETES_NAMESPACE",
               "valueFrom" : {
                 "fieldRef" : {
@@ -93,7 +86,7 @@
                 }
               }
             } ],
-            "image" : "fabric8/nexus:2.2.61",
+            "image" : "fabric8/nexus:2.2.157",
             "imagePullPolicy" : "IfNotPresent",
             "name" : "nexus",
             "ports" : [ {
@@ -119,13 +112,5 @@
       }
     }
   } ],
-  "parameters" : [ {
-    "description" : "Password used to authenticate with Sonartype when deploying artifacts",
-    "name" : "SONATYPE_PASSWORD",
-    "value" : "RedHat$1"
-  }, {
-    "description" : "Username used to authenticate with Sonartype when deploying artifacts",
-    "name" : "SONATYPE_USERNAME",
-    "value" : "jenkins"
-  } ]
+  "parameters" : [ ]
 }

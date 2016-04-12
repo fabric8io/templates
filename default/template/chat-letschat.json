@@ -4,11 +4,11 @@
   "labels" : { },
   "metadata" : {
     "annotations" : {
-      "fabric8.hubot-notifier/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/hubot-notifier/src/main/fabric8/icon.png",
-      "description" : "Provides [Chat](http://fabric8.io/guide/chat.html) using [Hubot](https://hubot.github.com/) as the bot framework and [Let's Chat](https://github.com/sdelements/lets-chat) as the chat server",
-      "fabric8.hubot-notifier/summary" : "Watches the OpenShift environment and notifies Hubot of events such as builds completing or failing",
       "fabric8.hubot-letschat/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/hubot-letschat/src/main/fabric8/icon.png",
+      "description" : "Provides [Chat](http://fabric8.io/guide/chat.html) using [Hubot](https://hubot.github.com/) as the bot framework and [Let's Chat](https://github.com/sdelements/lets-chat) as the chat server",
       "fabric8.hubot-letschat/summary" : "[Hubot](http://hubot.github.com) chat bot for Lets Chat",
+      "fabric8.hubot-notifier/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/hubot-notifier/src/main/fabric8/icon.png",
+      "fabric8.hubot-notifier/summary" : "Watches the OpenShift environment and notifies Hubot of events such as builds completing or failing",
       "fabric8.chat-letschat/summary" : "Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/",
       "fabric8.chat-letschat/iconUrl" : "https://cdn.rawgit.com/fabric8io/fabric8-devops/master/packages/chat-letschat/src/main/fabric8/icon.png"
     },
@@ -22,14 +22,16 @@
       "annotations" : { },
       "labels" : {
         "project" : "hubot-letschat",
-        "component" : "hubot-letschat",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps",
+        "package" : "chat-letschat"
       },
       "name" : "hubot"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 80,
         "protocol" : "TCP",
@@ -37,8 +39,8 @@
       } ],
       "selector" : {
         "project" : "hubot-letschat",
-        "component" : "hubot-letschat",
-        "provider" : "fabric8"
+        "provider" : "fabric8",
+        "group" : "io.fabric8.devops.apps"
       },
       "type" : "LoadBalancer"
     }
@@ -49,12 +51,14 @@
       "annotations" : { },
       "labels" : {
         "provider" : "fabric8",
-        "component" : "hubot-letschat"
+        "project" : "hubot-letschat",
+        "package" : "chat-letschat"
       },
       "name" : "hubot-jenkins-notifier"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 5555,
         "protocol" : "TCP",
@@ -62,7 +66,7 @@
       } ],
       "selector" : {
         "provider" : "fabric8",
-        "component" : "hubot-letschat"
+        "project" : "hubot-letschat"
       }
     }
   }, {
@@ -70,11 +74,14 @@
     "kind" : "Service",
     "metadata" : {
       "annotations" : { },
-      "labels" : { },
+      "labels" : {
+        "package" : "chat-letschat"
+      },
       "name" : "letschat"
     },
     "spec" : {
       "deprecatedPublicIPs" : [ ],
+      "externalIPs" : [ ],
       "ports" : [ {
         "port" : 80,
         "targetPort" : 5000
@@ -89,17 +96,16 @@
     "kind" : "ReplicationController",
     "metadata" : {
       "annotations" : {
-        "fabric8.io/git-commit" : "c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/git-branch" : "release-v2.2.61",
-        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/build-id" : "6",
-        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/6"
+        "fabric8.io/git-commit" : "988f82625a978532bc677bd4ddd884c8c6176743",
+        "fabric8.io/git-branch" : "release-v2.2.157",
+        "fabric8.io/build-id" : "3"
       },
       "labels" : {
         "project" : "hubot-letschat",
-        "component" : "hubot-letschat",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps",
+        "package" : "chat-letschat"
       },
       "name" : "hubot-letschat"
     },
@@ -107,18 +113,19 @@
       "replicas" : 1,
       "selector" : {
         "project" : "hubot-letschat",
-        "component" : "hubot-letschat",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "template" : {
         "metadata" : {
           "annotations" : { },
           "labels" : {
             "project" : "hubot-letschat",
-            "component" : "hubot-letschat",
             "provider" : "fabric8",
-            "version" : "2.2.61"
+            "version" : "2.2.157",
+            "group" : "io.fabric8.devops.apps",
+            "package" : "chat-letschat"
           }
         },
         "spec" : {
@@ -180,36 +187,36 @@
     "kind" : "ReplicationController",
     "metadata" : {
       "annotations" : {
-        "fabric8.io/git-branch" : "release-v2.2.61",
-        "fabric8.io/git-commit" : "c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/6",
-        "fabric8.io/build-id" : "6"
+        "fabric8.io/git-branch" : "release-v2.2.157",
+        "fabric8.io/git-commit" : "988f82625a978532bc677bd4ddd884c8c6176743",
+        "fabric8.io/build-id" : "3"
       },
       "labels" : {
-        "project" : "hubot-notifier",
-        "component" : "hubotNotifier",
+        "project" : "hubotNotifier",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps",
+        "package" : "chat-letschat"
       },
       "name" : "hubot-notifier"
     },
     "spec" : {
       "replicas" : 1,
       "selector" : {
-        "project" : "hubot-notifier",
-        "component" : "hubotNotifier",
+        "project" : "hubotNotifier",
         "provider" : "fabric8",
-        "version" : "2.2.61"
+        "version" : "2.2.157",
+        "group" : "io.fabric8.devops.apps"
       },
       "template" : {
         "metadata" : {
           "annotations" : { },
           "labels" : {
-            "project" : "hubot-notifier",
-            "component" : "hubotNotifier",
+            "project" : "hubotNotifier",
             "provider" : "fabric8",
-            "version" : "2.2.61"
+            "version" : "2.2.157",
+            "group" : "io.fabric8.devops.apps",
+            "package" : "chat-letschat"
           }
         },
         "spec" : {
@@ -220,6 +227,12 @@
               "name" : "HUBOT_KUBERNETES_ROOM",
               "value" : "#fabric8_${namespace}"
             }, {
+              "name" : "HUBOT_USERNAME",
+              "value" : "${HUBOT_USERNAME}"
+            }, {
+              "name" : "HUBOT_PASSWORD",
+              "value" : "${HUBOT_PASSWORD}"
+            }, {
               "name" : "KUBERNETES_NAMESPACE",
               "valueFrom" : {
                 "fieldRef" : {
@@ -227,7 +240,7 @@
                 }
               }
             } ],
-            "image" : "fabric8/hubot-notifier:2.2.61",
+            "image" : "fabric8/hubot-notifier:2.2.157",
             "name" : "hubot-notifier",
             "ports" : [ {
               "containerPort" : 8778,
@@ -248,14 +261,14 @@
     "kind" : "ReplicationController",
     "metadata" : {
       "annotations" : {
-        "fabric8.io/git-branch" : "release-v2.2.61",
-        "fabric8.io/git-commit" : "c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/git-url" : "http://gogs.release.cd.fabric8.io/gogsadmin/oss-parent/commit/c3165f12e540e71c02123159a733c326a65e477e",
-        "fabric8.io/build-url" : "http://jenkins.release.cd.fabric8.io/job/gogsadmin-oss-parent/6",
-        "fabric8.io/build-id" : "6"
+        "fabric8.io/git-branch" : "release-v2.2.157",
+        "fabric8.io/git-commit" : "988f82625a978532bc677bd4ddd884c8c6176743",
+        "fabric8.io/build-id" : "3"
       },
       "labels" : {
-        "name" : "letschat"
+        "name" : "letschat",
+        "provider" : "fabric8",
+        "package" : "chat-letschat"
       },
       "name" : "letschat"
     },
@@ -268,7 +281,9 @@
         "metadata" : {
           "annotations" : { },
           "labels" : {
-            "name" : "letschat"
+            "name" : "letschat",
+            "provider" : "fabric8",
+            "package" : "chat-letschat"
           },
           "name" : "letschat"
         },
@@ -295,10 +310,10 @@
               "value" : "${LETSCHAT_HUBOT_TOKEN}"
             }, {
               "name" : "LETSCHAT_HUBOT_PASSWORD",
-              "value" : "${LETSCHAT_HUBOT_PASSWORD}"
+              "value" : "${HUBOT_PASSWORD}"
             }, {
               "name" : "LETSCHAT_HUBOT_USERNAME",
-              "value" : "fabric8"
+              "value" : "${HUBOT_USERNAME}"
             }, {
               "name" : "LETSCHAT_HUBOT_EMAIL",
               "value" : "fabric8-admin@googlegroups.com"
@@ -324,7 +339,7 @@
               "name" : "LCB_DATABASE_URI",
               "value" : "mongodb://127.0.0.1:27017/letschat"
             } ],
-            "image" : "fabric8/lets-chat:2.2.61",
+            "image" : "fabric8/lets-chat:2.2.157",
             "name" : "letschat",
             "ports" : [ {
               "containerPort" : 5000,
@@ -340,20 +355,16 @@
     }
   } ],
   "parameters" : [ {
-    "description" : "The DNS domain added to the serviceName.namespace.svc. to make the DNS name",
-    "name" : "KUBERNETES_DNS_DOMAIN",
-    "value" : "cluster.local"
+    "description" : "API key for a particular user",
+    "name" : "HUBOT_GRAFANA_API_KEY"
   }, {
-    "description" : "Default rooms to create and for hubot to join",
-    "name" : "LETSCHAT_DEFAULT_ROOMS",
-    "value" : "fabric8_default"
-  }, {
-    "description" : "The password for Hubot to login to Let's Chat",
+    "description" : "The password for the Fabric8 Hubot bot",
     "name" : "LETSCHAT_HUBOT_PASSWORD",
     "value" : "RedHat$1"
   }, {
-    "description" : "API key for a particular user",
-    "name" : "HUBOT_GRAFANA_API_KEY"
+    "description" : "Comma delimited list of rooms for hubot to join on startup",
+    "name" : "LETSCHAT_DEFAULT_ROOMS",
+    "value" : "fabric8_default"
   }, {
     "description" : "The username for the Fabric8 Hubot bot",
     "name" : "LETSCHAT_HUBOT_USERNAME",
@@ -369,5 +380,17 @@
   }, {
     "description" : "Host for your Grafana 2.0 install, e.g. 'http://play.grafana.org'",
     "name" : "HUBOT_GRAFANA_HOST"
+  }, {
+    "description" : "The DNS domain added to the serviceName.namespace.svc. to make the DNS name",
+    "name" : "KUBERNETES_DNS_DOMAIN",
+    "value" : "cluster.local"
+  }, {
+    "description" : "The password for Hubot to login to the chat service",
+    "name" : "HUBOT_PASSWORD",
+    "value" : "RedHat$1"
+  }, {
+    "description" : "The username for Hubot to login to the chat service",
+    "name" : "HUBOT_USERNAME",
+    "value" : "fabric8"
   } ]
 }
